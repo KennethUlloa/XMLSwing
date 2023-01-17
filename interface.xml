@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Frame
+    width="400"
+    height="600"
+    title="Ventana de prueba"
+    onclose="exit"
+    container="grid"
+    icon="D:/Imágenes/cinco.png">
+
+</Frame>
