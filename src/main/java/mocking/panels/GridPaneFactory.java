@@ -11,12 +11,12 @@ import java.util.HashMap;
 
 public class GridPaneFactory extends PanelMockFactory {
     @Override
-    public JComponent buildComponent(Node node) {
+    public JComponent buildComponent(MockNode node) {
         JPanel panel = new JPanel(new GridLayout());
-        HashMap<String, String > attr = MockNode.getAttributes(node);
+        //HashMap<String, String > attr = MockNode.getAttributes(node);
 
-        if(attr.containsKey("layout")) {
-            String[] values = attr.get("layout").trim().split(" ");
+        if(node.hasAttribute("layout")) {
+            String[] values = node.getAttribute("layout").trim().split(" ");
             if(values.length == 2) {
                 try {
                     panel.setLayout(new GridLayout(Integer.parseInt(values[0]), Integer.parseInt(values[1])));
@@ -30,16 +30,16 @@ public class GridPaneFactory extends PanelMockFactory {
             }
         }
 
-        addChildren(node, panel);
+        addChildren(node.getNode(), panel);
+        System.out.println(panel);
         return panel;
     }
 
     @Override
     public void addChildren(Node node, JPanel panel) {
         for(int i = 0; i < node.getChildNodes().getLength() ; i++) {
-            Node e = node.getChildNodes().item(i);
-            if(!MockNode.shouldIgnore(e)) {
-                MockNode mockNode = new MockNode(e);
+            MockNode mockNode = new MockNode(node.getChildNodes().item(i));
+            if(!mockNode.shouldIgnore()) {
                 if(mockNode.getComponent() != null) {
                     panel.add(mockNode.getComponent());
                 }

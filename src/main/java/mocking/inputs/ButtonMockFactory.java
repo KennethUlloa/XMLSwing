@@ -11,16 +11,15 @@ import java.awt.event.ActionListener;
 
 public class ButtonMockFactory extends JComponentMockFactory {
     @Override
-    public JComponent buildComponent(Node node) {
-        JButton button = new JButton(node.getTextContent().trim());
+    public JComponent buildComponent(MockNode node) {
+        JButton button = new JButton(node.getNode().getTextContent().trim());
         setActionListener(button, node);
         return button;
     }
 
-    private void setActionListener(JButton button, Node e) {
-        String property = MockMaker.getAttributeValue(e, "onclick");
-        if(property == null) return;
-        ActionListener actionListener = ActionListenersForMock.getInstance().get(property);
+    private void setActionListener(JButton button, MockNode e) {
+        if(e.getAttributes().containsKey("onclick")) return;
+        ActionListener actionListener = ActionListenersForMock.getInstance().get(e.getAttributes().get("onclick"));
         if(actionListener == null) return;
         button.addActionListener(actionListener);
     }

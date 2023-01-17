@@ -28,7 +28,8 @@ public class MockMaker {
         Document doc = db.parse(new File(path));
         doc.getDocumentElement().normalize();
         Element root = doc.getDocumentElement();
-        return  (JPanel) MockElementFactory.getInstance().getFactory(root.getNodeName()).buildComponent(root);
+        MockNode mockNode = new MockNode(root);
+        return  (JPanel) MockElementFactory.getInstance().getFactory(root.getNodeName()).buildComponent(mockNode);
     }
 
     public JFrame generateFrame() throws ParserConfigurationException, IOException, SAXException {
@@ -42,10 +43,9 @@ public class MockMaker {
 
         for(int i = 0 ; i < root.getChildNodes().getLength() ; i++) {
             MockNode mockNode = new MockNode(root.getChildNodes().item(i));
-            if(!MockNode.shouldIgnore(root.getChildNodes().item(i))){
-                JPanel panel = (JPanel) new MockNode(root.getChildNodes().item(i), true).getComponent();
+            if(!mockNode.shouldIgnore()){
+                JPanel panel = (JPanel) mockNode.getComponent();
                 frame.setContentPane(panel);
-
                 break;
             }
         }

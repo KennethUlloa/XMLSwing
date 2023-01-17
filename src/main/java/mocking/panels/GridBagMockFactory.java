@@ -1,5 +1,6 @@
 package mocking.panels;
 
+import mocking.GridBagConstraintParser;
 import mocking.MockNode;
 import mocking.MockMaker;
 import org.w3c.dom.Node;
@@ -9,40 +10,40 @@ import java.awt.*;
 
 public class GridBagMockFactory extends PanelMockFactory {
     @Override
-    public JComponent buildComponent(Node node) {
+    public JComponent buildComponent(MockNode node) {
         JPanel panel = new JPanel();
         GridBagLayout gridBagLayout = new GridBagLayout();
-        String values = MockMaker.getAttributeValue(node, "row-display");
-        if(values != null) {
-            gridBagLayout.rowWeights = calculateWeights(values);
+        //String values = MockMaker.getAttributeValue(node, "row-display");
+        if(node.hasAttribute("row-display")) {
+            gridBagLayout.rowWeights = calculateWeights(node.getAttribute("row-display"));
         }
-        values = MockMaker.getAttributeValue(node, "column-display");
-        if(values != null) {
-            gridBagLayout.columnWeights = calculateWeights(values);
+        //values = MockMaker.getAttributeValue(node, "column-display");
+        if(node.hasAttribute("column-display")) {
+            gridBagLayout.columnWeights = calculateWeights(node.getAttribute("column-display"));
         }
-        values = MockMaker.getAttributeValue(node, "rows");
-        if(values != null) {
-            gridBagLayout.rowHeights = calculateWidths(values);
+        //values = MockMaker.getAttributeValue(node, "rows");
+        if(node.hasAttribute("rows")) {
+            gridBagLayout.rowHeights = calculateWidths(node.getAttribute("rows"));
         }
 
-        values = MockMaker.getAttributeValue(node, "columns");
-        if(values != null) {
-            gridBagLayout.columnWidths = calculateWidths(values);
+        //values = MockMaker.getAttributeValue(node, "columns");
+        if(node.hasAttribute("columns")) {
+            gridBagLayout.columnWidths = calculateWidths(node.getAttribute("columns"));
         }
 
         panel.setLayout(gridBagLayout);
-        addChildren(node, panel);
+        addChildren(node.getNode(), panel);
         return panel;
     }
 
     @Override
     public void addChildren(Node node, JPanel panel) {
         for(int i = 0; i < node.getChildNodes().getLength() ; i++) {
-            Node e = node.getChildNodes().item(i);
-            if(!MockNode.shouldIgnore(e)) {
-                MockNode mockNode = new MockNode(e);
+            MockNode mockNode = new MockNode(node.getChildNodes().item(i));
+            if(!mockNode.shouldIgnore()) {
+                //MockNode mockNode = new MockNode(e);
                 if(mockNode.getComponent() != null) {
-                    panel.add(mockNode.getComponent(), mockNode.getConstraints());
+                    panel.add(mockNode.getComponent(), GridBagConstraintParser.fromNode(mockNode));
                 }
             }
         }

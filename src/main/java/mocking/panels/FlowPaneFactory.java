@@ -11,19 +11,19 @@ import java.awt.*;
 
 public class FlowPaneFactory extends PanelMockFactory {
     @Override
-    public JComponent buildComponent(Node node) {
-        System.out.println(node.getNodeName());
+    public JComponent buildComponent(MockNode node) {
+        System.out.println(node.getNode().getNodeName());
         JPanel panel = new JPanel(new FlowLayout());
         setAlignment(panel, node);
-        addChildren(node, panel);
+        addChildren(node.getNode(), panel);
         return panel;
     }
 
-    private void setAlignment(JPanel panel, Node node) {
-        String property = MockMaker.getAttributeValue(node, "align");
-        if(property == null) return;
+    private void setAlignment(JPanel panel, MockNode node) {
+        //String property = MockMaker.getAttributeValue(node, "align");
+        if(node.hasAttribute("align")) return;
         FlowLayout flowLayout = null;
-        switch (property) {
+        switch (node.getAttribute("align")) {
             case "center": flowLayout = new FlowLayout(FlowLayout.CENTER); break;
             case "left": flowLayout = new FlowLayout(FlowLayout.LEFT); break;
             case "leading": flowLayout = new FlowLayout(FlowLayout.LEADING); break;
@@ -36,11 +36,11 @@ public class FlowPaneFactory extends PanelMockFactory {
     @Override
     public void addChildren(Node node, JPanel panel) {
         for(int i = 0; i < node.getChildNodes().getLength() ; i++) {
-            Node e = node.getChildNodes().item(i);
-            if(!MockNode.shouldIgnore(e)) {
-                MockNode mockNode = new MockNode(e);
-                if(mockNode.getComponent() != null) {
-                    panel.add(mockNode.getComponent());
+            MockNode mock = new MockNode(node.getChildNodes().item(i));
+            if(!mock.shouldIgnore()) {
+                JComponent component = mock.getComponent();
+                if(component != null) {
+                    panel.add(component);
                 }
             }
         }
