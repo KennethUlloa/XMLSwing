@@ -217,7 +217,7 @@ public class CommonProperties {
 
     }
 
-    private static Color getColor(String string) {
+    public static Color getColor(String string) {
         switch (string) {
             case "yellow" : return Color.YELLOW;
             case "blue": return Color.BLUE;

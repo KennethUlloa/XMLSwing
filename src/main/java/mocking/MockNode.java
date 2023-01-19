@@ -68,6 +68,10 @@ public class MockNode {
             Node e = node.getAttributes().item(i);
             attributes.put(e.getNodeName(), e.getNodeValue());
         }
+        HashMap<String, String> styles = CommonProperties.readStyle(node);
+        for(String key: styles.keySet()) {
+            attributes.put(key, styles.get(key));
+        }
         return attributes;
     }
 

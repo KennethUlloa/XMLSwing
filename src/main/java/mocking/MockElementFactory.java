@@ -1,12 +1,10 @@
 package mocking;
 
 import mocking.inputs.ButtonMockFactory;
+import mocking.inputs.TextAreaMockFactory;
 import mocking.labels.LabelMockFactory;
-import mocking.panels.BorderPaneMockFactory;
-import mocking.panels.FlowPaneFactory;
-import mocking.panels.GridBagMockFactory;
+import mocking.panels.*;
 import mocking.inputs.TextFieldMockFactory;
-import mocking.panels.GridPaneFactory;
 
 import java.util.HashMap;
 
@@ -22,6 +20,8 @@ public class MockElementFactory {
         components.put("Button", new ButtonMockFactory());
         components.put("Grid", new GridPaneFactory());
         components.put("Border", new BorderPaneMockFactory());
+        components.put("ScrollPane", new ScrollPaneMockFactory());
+        components.put("TextArea", new TextAreaMockFactory());
     }
 
     public static MockElementFactory getInstance() {

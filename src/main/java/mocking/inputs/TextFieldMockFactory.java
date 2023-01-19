@@ -13,12 +13,13 @@ public class TextFieldMockFactory extends JComponentMockFactory {
     public JComponent buildComponent(MockNode node) {
         JTextField textField = new JTextField();
         //String attr = MockMaker.getAttributeValue(node, "cols");
+        TextCommonProperties.setUpComponent(textField, node);
         if(node.getAttributes().containsKey("cols")) {
             try {
                 textField.setColumns(Integer.parseInt(node.getAttribute("cols")));
             } catch (NumberFormatException ignored) {}
         }
-
+        textField.setText(node.getNode().getTextContent().trim());
         return textField;
     }
 }

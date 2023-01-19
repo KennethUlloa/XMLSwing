@@ -5,26 +5,18 @@
     title="Ventana de prueba"
     onclose="exit"
     container="grid"
-    icon="D:/Imágenes/cinco.png">
+    icon="cinco.png">
     <Border row-display="0 1" column-display="1" columns="1" rows="0 1">
         <Label pos="top" layout="top" fill="horizontal" row="0" col="0"
                style="background: black; color: green; padding: 10; font-size: 22"
         >Panel</Label>
         <!--Label row="1" col="0" fill="both">Algo</Label-->
-        <Grid pos="center" fill="both" row="1" col="0" layout="4 3 5 5" style="padding: 5">
-            <Button style="background: lightgray; font-size: 22">1</Button>
-            <Button style="background: lightgray; font-size: 22">2</Button>
-            <Button style="background: lightgray; font-size: 22">3</Button>
-            <Button style="background: lightgray; font-size: 22">4</Button>
-            <Button style="background: lightgray; font-size: 22">5</Button>
-            <Button style="background: lightgray; font-size: 22">6</Button>
-            <Button style="background: lightgray; font-size: 22">7</Button>
-            <Button style="background: lightgray; font-size: 22">8</Button>
-            <Button style="background: lightgray; font-size: 22">9</Button>
-            <Button style="background: lightgray; font-size: 22">*</Button>
-            <Button style="background: lightgray; font-size: 22">0</Button>
-            <Button style="background: lightgray; font-size: 22">#</Button>
-        </Grid>
+        <ScrollPane h-policy="never" style="border: 2 double red; background: blue">
+            <Grid>
+                <TextArea style="padding: 10; color: white; background: black; caret: red; selection: #c2e3bc">Hola</TextArea>
+                <TextField>Prueba</TextField>
+            </Grid>
+        </ScrollPane>
         <Label pos="bottom" h-align="center" style="font-size: 32">Copyright (c) 2023</Label>
     </Border>
 </Frame>
