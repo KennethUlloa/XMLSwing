@@ -1,16 +1,12 @@
 package mocking.labels;
 
 import mocking.JComponentMockFactory;
-import mocking.MockMaker;
+import mocking.MockFactory;
 import mocking.MockNode;
-import org.w3c.dom.Node;
 
 import javax.swing.*;
-import java.util.HashMap;
 
 public class LabelMockFactory extends JComponentMockFactory {
-
-
     @Override
     public JComponent buildComponent(MockNode node) {
         JLabel label = new JLabel();
@@ -19,6 +15,15 @@ public class LabelMockFactory extends JComponentMockFactory {
         //System.out.println(node.getNode().);
         label.setText(node.getNode().getTextContent().trim());
         return label;
+    }
+
+    @Override
+    public JComponent buildComponent(MockNode node, MockFactory mockMaker) {
+        JComponent component = buildComponent(node);
+        if(node.hasAttribute("id")) {
+            mockMaker.register(node.getAttribute("id"), component);
+        }
+        return component;
     }
 
     private void setHAlignment(JLabel label, MockNode node) {

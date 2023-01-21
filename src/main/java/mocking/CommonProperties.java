@@ -57,7 +57,6 @@ public class CommonProperties {
 
     public static void setUpComponent(JComponent component, Node node) {
         HashMap<String, String> styles = readStyle(node);
-        System.out.println(styles);
         setPosition(component, styles);
         setSize(component, styles);
         setPreferredSize(component, styles);
@@ -92,7 +91,7 @@ public class CommonProperties {
 
     public static HashMap<String, String> readStyle(Node node) {
         HashMap<String,String> styles = new HashMap<>();
-        String property = MockMaker.getAttributeValue(node, "style");
+        String property = MockFactory.getAttributeValue(node, "style");
         if(property == null) return styles;
         property = property.trim();
         String[] values = property.split("(;)|(\n)");
@@ -155,54 +154,66 @@ public class CommonProperties {
     }
 
     public static void setSize(JComponent component, HashMap<String, String> styles) {
-        if(!styles.containsKey("width")) return;
-        try {component.setSize(Integer.parseInt(styles.get("width")), component.getHeight());
-        } catch (NumberFormatException ignored) {}
-        if(!styles.containsKey("height")) return;
-        try {component.setSize(component.getWidth(), Integer.parseInt(styles.get("height")));
-        } catch (NumberFormatException ignored) {}
+        if(styles.containsKey("width")) {
+            try {component.setSize(Integer.parseInt(styles.get("width")), component.getHeight());
+            } catch (NumberFormatException ignored) {}
+        }
+        if(styles.containsKey("height")) {
+            try {component.setSize(component.getWidth(), Integer.parseInt(styles.get("height")));
+            } catch (NumberFormatException ignored) {}
+        }
     }
     public static void setPosition(JComponent component, HashMap<String, String> styles) {
-        if(!styles.containsKey("x")) return;
-        try {component.setLocation(Integer.parseInt(styles.get("x")), component.getY());
-        } catch (NumberFormatException ignored) {}
-        if(!styles.containsKey("y")) return;
-        try {component.setLocation(component.getX(), Integer.parseInt(styles.get("y")));
-        } catch (NumberFormatException ignored) {}
-
+        if(styles.containsKey("x")){
+            try {component.setLocation(Integer.parseInt(styles.get("x")), component.getY());
+            } catch (NumberFormatException ignored) {}
+        }
+        if(styles.containsKey("y")) {
+            try {component.setLocation(component.getX(), Integer.parseInt(styles.get("y")));
+            } catch (NumberFormatException ignored) {}
+        }
     }
 
     public static void setPreferredSize(JComponent component, HashMap<String, String> styles) {
-        if(!styles.containsKey("pref-width")) return;
-        try {component.setPreferredSize(new Dimension(
-                Integer.parseInt(styles.get("pref-width")), component.getPreferredSize().height));
-        } catch (NumberFormatException ignored) {}
-        if(!styles.containsKey("pref-height")) return;
-        try {component.setPreferredSize(new Dimension(
-                component.getPreferredSize().width, Integer.parseInt(styles.get("pref-height"))));
-        } catch (NumberFormatException ignored) {}
+        if(styles.containsKey("pref-width")) {
+            try {component.setPreferredSize(new Dimension(
+                    Integer.parseInt(styles.get("pref-width")), component.getPreferredSize().height));
+            } catch (NumberFormatException ignored) {}
+        }
+
+        if(styles.containsKey("pref-height")) {
+            try {component.setPreferredSize(new Dimension(
+                    component.getPreferredSize().width, Integer.parseInt(styles.get("pref-height"))));
+            } catch (NumberFormatException ignored) {}
+        }
+
     }
 
     public static void setMinimumSize(JComponent component, HashMap<String, String> styles) {
-        if(!styles.containsKey("min-width")) return;
-        try {component.setMinimumSize(new Dimension(
-                Integer.parseInt(styles.get("min-width")), component.getMinimumSize().height));
-        } catch (NumberFormatException ignored) {}
-        if(!styles.containsKey("min-height")) return;
-        try {component.setMinimumSize(new Dimension(
-                component.getMinimumSize().width, Integer.parseInt(styles.get("min-height"))));
-        } catch (NumberFormatException ignored) {}
+        if(styles.containsKey("min-width")) {
+            try {component.setMinimumSize(new Dimension(
+                    Integer.parseInt(styles.get("min-width")), component.getMinimumSize().height));
+            } catch (NumberFormatException ignored) {}
+        }
+        if(styles.containsKey("min-height")) {
+            try {component.setMinimumSize(new Dimension(
+                    component.getMinimumSize().width, Integer.parseInt(styles.get("min-height"))));
+            } catch (NumberFormatException ignored) {}
+        }
+
     }
 
     public static void setMaximumSize(JComponent component, HashMap<String, String> styles) {
-        if(!styles.containsKey("max-width")) return;
-        try {component.setMaximumSize(new Dimension(
-                Integer.parseInt(styles.get("max-width")), component.getMaximumSize().height));
-        } catch (NumberFormatException ignored) {}
-        if(!styles.containsKey("max-height")) return;
-        try {component.setMaximumSize(new Dimension(
-                component.getMaximumSize().width, Integer.parseInt(styles.get("max-height"))));
-        } catch (NumberFormatException ignored) {}
+        if(styles.containsKey("max-width")) {
+            try {component.setMaximumSize(new Dimension(
+                    Integer.parseInt(styles.get("max-width")), component.getMaximumSize().height));
+            } catch (NumberFormatException ignored) {}
+        }
+        if(styles.containsKey("max-height")) {
+            try {component.setMaximumSize(new Dimension(
+                    component.getMaximumSize().width, Integer.parseInt(styles.get("max-height"))));
+            } catch (NumberFormatException ignored) {}
+        }
     }
 
     public static void setBackgroundColor(JComponent component, HashMap<String, String> styles) {

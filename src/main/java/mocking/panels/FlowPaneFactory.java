@@ -1,21 +1,30 @@
 package mocking.panels;
 
-import mocking.JComponentMockFactory;
-import mocking.MockMaker;
+import mocking.MockFactory;
 import mocking.MockNode;
 import org.w3c.dom.Node;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class FlowPaneFactory extends PanelMockFactory {
     @Override
     public JComponent buildComponent(MockNode node) {
-        System.out.println(node.getNode().getNodeName());
+        return buildComponent(node, null);
+    }
+
+    @Override
+    public JComponent buildComponent(MockNode node, MockFactory mockMaker) {
         JPanel panel = new JPanel(new FlowLayout());
         setAlignment(panel, node);
-        addChildren(node.getNode(), panel);
+        if(mockMaker == null){
+            addChildren(node.getNode(), panel);
+        }else {
+            addChildren(node.getNode(), panel, mockMaker);
+            if(node.hasAttribute("id")) {
+                mockMaker.register(node.getAttribute("id"), panel);
+            }
+        }
         return panel;
     }
 
@@ -38,7 +47,20 @@ public class FlowPaneFactory extends PanelMockFactory {
         for(int i = 0; i < node.getChildNodes().getLength() ; i++) {
             MockNode mock = new MockNode(node.getChildNodes().item(i));
             if(!mock.shouldIgnore()) {
-                JComponent component = mock.getComponent();
+                JComponent component = mock.getComponent(null);
+                if(component != null) {
+                    panel.add(component);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void addChildren(Node node, JPanel panel, MockFactory mockMaker) {
+        for(int i = 0; i < node.getChildNodes().getLength() ; i++) {
+            MockNode mock = new MockNode(node.getChildNodes().item(i));
+            if(!mock.shouldIgnore()) {
+                JComponent component = mock.getComponent(mockMaker);
                 if(component != null) {
                     panel.add(component);
                 }

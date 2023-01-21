@@ -1,9 +1,8 @@
 package mocking.inputs;
 
 import mocking.JComponentMockFactory;
-import mocking.MockMaker;
+import mocking.MockFactory;
 import mocking.MockNode;
-import org.w3c.dom.Node;
 
 import javax.swing.*;
 
@@ -21,5 +20,15 @@ public class TextFieldMockFactory extends JComponentMockFactory {
         }
         textField.setText(node.getNode().getTextContent().trim());
         return textField;
+    }
+
+    @Override
+    public JComponent buildComponent(MockNode node, MockFactory mockMaker) {
+        JComponent component = buildComponent(node);
+        System.out.println("Mock");
+        if(node.hasAttribute("id")) {
+            mockMaker.register(node.getAttribute("id"), component);
+        }
+        return component;
     }
 }

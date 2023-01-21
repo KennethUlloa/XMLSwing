@@ -2,37 +2,43 @@ package mocking.panels;
 
 import mocking.GridBagConstraintParser;
 import mocking.MockNode;
-import mocking.MockMaker;
+import mocking.MockFactory;
 import org.w3c.dom.Node;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class GridBagMockFactory extends PanelMockFactory {
+public class GridBagFactory extends PanelMockFactory {
     @Override
     public JComponent buildComponent(MockNode node) {
+        return buildComponent(node, null);
+    }
+
+    @Override
+    public JComponent buildComponent(MockNode node, MockFactory mockMaker) {
         JPanel panel = new JPanel();
         GridBagLayout gridBagLayout = new GridBagLayout();
-        //String values = MockMaker.getAttributeValue(node, "row-display");
         if(node.hasAttribute("row-display")) {
             gridBagLayout.rowWeights = calculateWeights(node.getAttribute("row-display"));
         }
-        //values = MockMaker.getAttributeValue(node, "column-display");
         if(node.hasAttribute("column-display")) {
             gridBagLayout.columnWeights = calculateWeights(node.getAttribute("column-display"));
         }
-        //values = MockMaker.getAttributeValue(node, "rows");
         if(node.hasAttribute("rows")) {
             gridBagLayout.rowHeights = calculateWidths(node.getAttribute("rows"));
         }
-
-        //values = MockMaker.getAttributeValue(node, "columns");
         if(node.hasAttribute("columns")) {
             gridBagLayout.columnWidths = calculateWidths(node.getAttribute("columns"));
         }
-
         panel.setLayout(gridBagLayout);
-        addChildren(node.getNode(), panel);
+        if(mockMaker == null){
+            addChildren(node.getNode(), panel);
+            return panel;
+        }
+        if(node.hasAttribute("id")) {
+            mockMaker.register(node.getAttribute("id"), panel);
+        }
+        addChildren(node.getNode(), panel, mockMaker);
         return panel;
     }
 
@@ -42,8 +48,21 @@ public class GridBagMockFactory extends PanelMockFactory {
             MockNode mockNode = new MockNode(node.getChildNodes().item(i));
             if(!mockNode.shouldIgnore()) {
                 //MockNode mockNode = new MockNode(e);
-                if(mockNode.getComponent() != null) {
-                    panel.add(mockNode.getComponent(), GridBagConstraintParser.fromNode(mockNode));
+                if(mockNode.getComponent(null) != null) {
+                    panel.add(mockNode.getComponent(null), GridBagConstraintParser.fromNode(mockNode));
+                }
+            }
+        }
+    }
+
+    @Override
+    public void addChildren(Node node, JPanel panel, MockFactory mockMaker) {
+        for(int i = 0; i < node.getChildNodes().getLength() ; i++) {
+            MockNode mockNode = new MockNode(node.getChildNodes().item(i));
+            if(!mockNode.shouldIgnore()) {
+                JComponent component = mockNode.getComponent(mockMaker);
+                if(component != null) {
+                    panel.add(component, GridBagConstraintParser.fromNode(mockNode));
                 }
             }
         }

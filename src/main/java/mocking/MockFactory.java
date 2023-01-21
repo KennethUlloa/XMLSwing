@@ -6,20 +6,24 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class MockMaker {
+public class MockFactory {
     private String path;
-    public MockMaker(String path) {
+    private HashMap<String, JComponent> components;
+    public MockFactory(String path) {
         this.path = path;
+        components = new HashMap<>();
+    }
+
+    public void register(String string, JComponent component) {
+        components.put(string, component);
     }
 
     public JPanel generatePanel() throws ParserConfigurationException, IOException, SAXException {
@@ -29,7 +33,7 @@ public class MockMaker {
         doc.getDocumentElement().normalize();
         Element root = doc.getDocumentElement();
         MockNode mockNode = new MockNode(root);
-        return  (JPanel) MockElementFactory.getInstance().getFactory(root.getNodeName()).buildComponent(mockNode);
+        return  (JPanel) MockElementFactory.getInstance().getFactory(root.getNodeName()).buildComponent(mockNode, this);
     }
 
     public JFrame generateFrame() throws ParserConfigurationException, IOException, SAXException {
@@ -44,7 +48,7 @@ public class MockMaker {
         for(int i = 0 ; i < root.getChildNodes().getLength() ; i++) {
             MockNode mockNode = new MockNode(root.getChildNodes().item(i));
             if(!mockNode.shouldIgnore()){
-                JPanel panel = (JPanel) mockNode.getComponent();
+                JPanel panel = (JPanel) mockNode.getComponent(this);
                 frame.setContentPane(panel);
                 break;
             }
@@ -59,5 +63,9 @@ public class MockMaker {
         if (e.getAttributes() == null) return null;
         if(e.getAttributes().getNamedItem(attribute) == null) return null;
         return e.getAttributes().getNamedItem(attribute).getNodeValue();
+    }
+
+    public JComponent search(String id) {
+        return components.get(id);
     }
 }

@@ -1,20 +1,16 @@
 package mocking.panels;
 
-import mocking.JComponentMockFactory;
-import mocking.MockMaker;
+import mocking.MockFactory;
 import mocking.MockNode;
 import org.w3c.dom.Node;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
 
 public class GridPaneFactory extends PanelMockFactory {
     @Override
-    public JComponent buildComponent(MockNode node) {
+    public JComponent buildComponent(MockNode node, MockFactory mockMaker) {
         JPanel panel = new JPanel(new GridLayout());
-        //HashMap<String, String > attr = MockNode.getAttributes(node);
-
         if(node.hasAttribute("layout")) {
             String[] values = node.getAttribute("layout").trim().split(" ");
             if(values.length == 2) {
@@ -29,10 +25,21 @@ public class GridPaneFactory extends PanelMockFactory {
                 } catch (NumberFormatException ignored) {}
             }
         }
-
+        if(mockMaker != null){
+            if(node.hasAttribute("id")) {
+                mockMaker.register(node.getAttribute("id"), panel);
+            }
+            addChildren(node.getNode(), panel, mockMaker);
+            return panel;
+        }
         addChildren(node.getNode(), panel);
-        System.out.println(panel);
+        //System.out.println(panel);
         return panel;
+    }
+
+    @Override
+    public JComponent buildComponent(MockNode node) {
+        return buildComponent(node, null);
     }
 
     @Override
@@ -40,8 +47,20 @@ public class GridPaneFactory extends PanelMockFactory {
         for(int i = 0; i < node.getChildNodes().getLength() ; i++) {
             MockNode mockNode = new MockNode(node.getChildNodes().item(i));
             if(!mockNode.shouldIgnore()) {
-                if(mockNode.getComponent() != null) {
-                    panel.add(mockNode.getComponent());
+                if(mockNode.getComponent(null) != null) {
+                    panel.add(mockNode.getComponent(null));
+                }
+            }
+        }
+    }
+
+    @Override
+    public void addChildren(Node node, JPanel panel, MockFactory mockMaker) {
+        for(int i = 0; i < node.getChildNodes().getLength() ; i++) {
+            MockNode mockNode = new MockNode(node.getChildNodes().item(i));
+            if(!mockNode.shouldIgnore()) {
+                if(mockNode.getComponent(mockMaker) != null) {
+                    panel.add(mockNode.getComponent(mockMaker));
                 }
             }
         }

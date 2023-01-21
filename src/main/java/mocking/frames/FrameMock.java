@@ -1,6 +1,5 @@
 package mocking.frames;
 
-import mocking.MockMaker;
 import mocking.MockNode;
 import org.w3c.dom.Node;
 

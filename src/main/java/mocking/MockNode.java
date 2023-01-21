@@ -34,22 +34,33 @@ public class MockNode {
         return constraints;
     }
 
-    public JComponent getComponent() {
+    public JComponent getComponent(MockFactory mockMaker) {
+        if(component == null){
+            component = buildNode(mockMaker);
+        }
+        return component;
+    }
+
+    /*public JComponent getComponent() {
         if(component == null){
             component = buildNode();
         }
 
         return component;
-    }
+    }*/
 
-    private JComponent buildNode() {
+    private JComponent buildNode(MockFactory mockMaker) {
         JComponentMockFactory componentMockFactory = MockElementFactory.getInstance().getFactory(node.getNodeName());
         if (componentMockFactory == null) return null;
-        JComponent component = componentMockFactory.buildComponent(this);
+        JComponent component;
+        if(mockMaker == null) {
+            component = componentMockFactory.buildComponent(this);
+        }else {
+            component = componentMockFactory.buildComponent(this, mockMaker);
+        }
         CommonProperties.setUpComponent(component, node);
         return component;
     }
-
     public boolean shouldIgnore() {
         return node.getNodeName().equals("#text") || node.getNodeName().equals("#comment");
     }

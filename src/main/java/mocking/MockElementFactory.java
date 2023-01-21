@@ -15,7 +15,7 @@ public class MockElementFactory {
         components = new HashMap<>();
         components.put("TextField", new TextFieldMockFactory());
         components.put("Label", new LabelMockFactory());
-        components.put("GridBag", new GridBagMockFactory());
+        components.put("GridBag", new GridBagFactory());
         components.put("Flow", new FlowPaneFactory());
         components.put("Button", new ButtonMockFactory());
         components.put("Grid", new GridPaneFactory());

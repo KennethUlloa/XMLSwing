@@ -7,16 +7,16 @@ import java.awt.*;
 public class ConstraintParser {
     public static GridBagConstraints fromNode(Node e) {
         GridBagConstraints constraints = new GridBagConstraints();
-        String value = MockMaker.getAttributeValue(e, "col");
+        String value = MockFactory.getAttributeValue(e, "col");
         if(value != null) {
             constraints.gridx = Integer.parseInt(value);
         }
-        value = MockMaker.getAttributeValue(e, "row");
+        value = MockFactory.getAttributeValue(e, "row");
         if(value != null) {
             constraints.gridy = Integer.parseInt(value);
         }
 
-        value = MockMaker.getAttributeValue(e, "fill");
+        value = MockFactory.getAttributeValue(e, "fill");
         if(value != null) {
             int op = GridBagConstraints.NONE;
             switch (value.trim()){
@@ -26,7 +26,7 @@ public class ConstraintParser {
             }
             constraints.fill = op;
         }
-        value = MockMaker.getAttributeValue(e, "insets");
+        value = MockFactory.getAttributeValue(e, "insets");
         if(value != null) {
             constraints.insets = CommonProperties.insetsFromString(value);
         }
