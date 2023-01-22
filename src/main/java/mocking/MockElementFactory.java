@@ -23,6 +23,8 @@ public class MockElementFactory {
         components.put("RadioButton", new RadioButtonFactory());
         components.put("CheckBox", new CheckBoxFactory());
         components.put("Slider", new SliderFactory());
+        components.put("Table", new TableFactory());
+        components.put("ComboBox", new ComboBoxFactory());
     }
 
     public static MockElementFactory getInstance() {
