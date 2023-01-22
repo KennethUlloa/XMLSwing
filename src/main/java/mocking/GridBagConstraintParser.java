@@ -26,14 +26,14 @@ public class GridBagConstraintParser {
             }
             constraints.fill = op;
         }
-        if(e.hasAttribute("row-span")){
-            try {
-                constraints.gridwidth = Integer.parseInt(e.getAttribute("row-span"));
-            } catch (NumberFormatException ignored) {}
-        }
         if(e.hasAttribute("col-span")){
             try {
-                constraints.gridheight = Integer.parseInt(e.getAttribute("col-span"));
+                constraints.gridwidth = Integer.parseInt(e.getAttribute("col-span"));
+            } catch (NumberFormatException ignored) {}
+        }
+        if(e.hasAttribute("row-span")){
+            try {
+                constraints.gridheight = Integer.parseInt(e.getAttribute("row-span"));
             } catch (NumberFormatException ignored) {}
         }
         if(e.hasAttribute("anchor")){

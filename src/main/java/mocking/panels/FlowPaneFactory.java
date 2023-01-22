@@ -30,7 +30,7 @@ public class FlowPaneFactory extends PanelMockFactory {
 
     private void setAlignment(JPanel panel, MockNode node) {
         //String property = MockMaker.getAttributeValue(node, "align");
-        if(node.hasAttribute("align")) return;
+        if(!node.hasAttribute("align")) return;
         FlowLayout flowLayout = null;
         switch (node.getAttribute("align")) {
             case "center": flowLayout = new FlowLayout(FlowLayout.CENTER); break;

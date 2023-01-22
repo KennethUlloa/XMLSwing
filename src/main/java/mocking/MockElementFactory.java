@@ -1,10 +1,8 @@
 package mocking;
 
-import mocking.inputs.ButtonMockFactory;
-import mocking.inputs.TextAreaMockFactory;
+import mocking.inputs.*;
 import mocking.labels.LabelMockFactory;
 import mocking.panels.*;
-import mocking.inputs.TextFieldMockFactory;
 
 import java.util.HashMap;
 
@@ -22,6 +20,9 @@ public class MockElementFactory {
         components.put("Border", new BorderPaneMockFactory());
         components.put("ScrollPane", new ScrollPaneMockFactory());
         components.put("TextArea", new TextAreaMockFactory());
+        components.put("RadioButton", new RadioButtonFactory());
+        components.put("CheckBox", new CheckBoxFactory());
+        components.put("Slider", new SliderFactory());
     }
 
     public static MockElementFactory getInstance() {

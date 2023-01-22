@@ -2,20 +2,33 @@
 <Frame
     width="400"
     height="600"
-    title="Ventana de prueba"
+    title="Ventana de prueba 2"
     onclose="exit"
     container="grid"
     icon="cinco.png">
-    <GridBag row-display="0 0 0 1" column-display="0 1" cols="0 1" rows="0 0 0 1" style="border: 2 solid red; padding: 5">
+    <GridBag row-display="0 0 0 0 0 1" column-display="0 1" cols="0 1" rows="0 0 0 0 1" style="border: 2 solid red; padding: 5">
         <Label row="0" col="0" anchor="right">Nombre</Label>
-        <TextField row="0" col="1" insets="5" fill="both" style="border: 1 solid red; padding: 5"/>
+        <TextField id="name" row="0" col="1" insets="5" fill="both" style="border: 1 solid red; padding: 5">{#name#}</TextField>
         <Label row="1" col="0" anchor="right">Apellido</Label>
-        <TextField row="1" col="1" fill="both" insets="5" style="padding: 5"/>
+        <TextField id="last-name" row="1" col="1" fill="both" insets="5" style="padding: 5">{#last-name#}</TextField>
         <Label row="2" col="0" anchor="top-right" insets="5 0 0 0" style="border: 1 solid red">Descripción</Label>
         <ScrollPane row="2" col="1" insets="5" fill="both" anchor="top-right"
-            style="border: 1 solid red; pref-height:300">
-            <TextArea style="padding: 5"/>
+            style="border: 1 solid red; pref-height:300; min-height:300">
+            <TextArea id="description" style="padding: 5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit turpis vitae magna placerat, in hendrerit velit lobortis. Fusce non magna sapien. Nunc congue, risus in hendrerit volutpat, metus libero dignissim lectus, sit amet iaculis nibh orci eu turpis. In sed laoreet metus, a faucibus augue. Donec placerat nisi at massa aliquam, ac lobortis est volutpat. Sed at libero justo. Vestibulum aliquam metus in tempus porttitor. Ut dolor purus, euismod eu dui a, lacinia eleifend elit. Pellentesque finibus ultrices neque consequat dapibus. Etiam eu elit at lectus imperdiet tincidunt. Sed in risus maximus, efficitur eros ultrices, pretium erat. Quisque fermentum dictum laoreet. Nam vestibulum turpis in auctor commodo.</TextArea>
         </ScrollPane>
+        <Flow row="3" col="0" col-span="2" align="right" style="border: 1 solid red">
+            <Button id="accept">Aceptar</Button>
+            <Button>Cancelar</Button>
+            <RadioButton selected="" group="op1">Opción 1</RadioButton>
+            <RadioButton group="op1">Opción 2</RadioButton>
+        </Flow>
+        <Flow row="4" col="0" col-span="2">
+            <CheckBox>Algo 1</CheckBox>
+            <CheckBox>Algo 2</CheckBox>
+            <CheckBox>Algo 3</CheckBox>
+            <CheckBox>Algo 4</CheckBox>
+        </Flow>
+        <Slider row="5" col="1" min="-10" max="10" value="-5" fill="horizontal"/>
     </GridBag>
 
 </Frame>
