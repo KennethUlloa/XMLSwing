@@ -43,4 +43,9 @@ public class SliderNodeFactory implements types.TypeNodeFactory<Component> {
         PropertiesReader.setUpComponent(typeNode);
         return typeNode;
     }
+
+    @Override
+    public String getTagName() {
+        return "Slider";
+    }
 }

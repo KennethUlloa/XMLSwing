@@ -50,4 +50,9 @@ public class ScrollPaneNodeFactory implements TypeNodeFactory<Component> {
         ComponentRepository.registerNode(typeNode, container);
         return typeNode;
     }
+
+    @Override
+    public String getTagName() {
+        return "ScrollPane";
+    }
 }

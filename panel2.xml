@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GridBag column-weights="0 1" rows="0 0 0" row-weights="0 0 1" cols="0 0">
+    <Label row="0" col="0">Algo</Label>
+    <TextField row="0" col="1" fill="both"/>
+    <Label row="1" col="0">Algo 2</Label>
+    <TextField row="1" col="1" fill="both"/>
+</GridBag>

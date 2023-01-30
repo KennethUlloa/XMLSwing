@@ -39,4 +39,9 @@ public class RadioButtonNodeFactory implements TypeNodeFactory<Component> {
         ComponentRepository.registerNode(typeNode, container);
         return typeNode;
     }
+
+    @Override
+    public String getTagName() {
+        return "RadioButton";
+    }
 }

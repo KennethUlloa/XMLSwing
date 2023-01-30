@@ -11,20 +11,27 @@ import java.awt.*;
 
 public class FactoryRepository extends TypeRepository<TypeNodeFactory<Component>> {
     public FactoryRepository() {
-        register("Flow", new FlowNodeFactory());
-        register("Button", new ButtonNodeFactory());
-        register("Frame", new FrameFactory());
-        register("TextField", new TextFieldNodeFactory());
-        register("TextArea", new TextAreaFactory());
-        register("GridBag", new GridBagNodeFactory());
-        register("CheckBox", new CheckBoxNodeFactory());
-        register("RadioButton", new RadioButtonNodeFactory());
-        register("ComboBox", new ComboBoxNodeFactory());
-        register("ScrollPane", new ScrollPaneNodeFactory());
-        register("Table", new TableNodeFactory());
-        register("Label", new LabelNodeFactory());
-        register("Slider", new SliderNodeFactory());
-        register("Border", new BorderNodeFactory());
-        register("Grid", new GridNodeFactory());
+        register(new FlowNodeFactory());
+        register(new ButtonNodeFactory());
+        register(new FrameFactory());
+        register(new TextFieldNodeFactory());
+        register(new TextAreaFactory());
+        register(new GridBagNodeFactory());
+        register(new CheckBoxNodeFactory());
+        register(new RadioButtonNodeFactory());
+        register(new ComboBoxNodeFactory());
+        register(new ScrollPaneNodeFactory());
+        register(new TableNodeFactory());
+        register(new LabelNodeFactory());
+        register(new SliderNodeFactory());
+        register(new BorderNodeFactory());
+        register(new GridNodeFactory());
+        register(new MenuBarNodeFactory());
+        register(new MenuNodeFactory());
+        register(new MenuItemNodeFactory());
+    }
+
+    private void register(TypeNodeFactory<Component> factory) {
+        register(factory.getTagName(), factory);
     }
 }

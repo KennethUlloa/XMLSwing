@@ -48,4 +48,9 @@ public class GridNodeFactory implements types.TypeNodeFactory<java.awt.Component
         ComponentRepository.registerNode(typeNode, container);
         return typeNode;
     }
+
+    @Override
+    public String getTagName() {
+        return "Grid";
+    }
 }

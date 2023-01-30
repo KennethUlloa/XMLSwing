@@ -53,6 +53,11 @@ public class GridBagNodeFactory implements TypeNodeFactory<Component> {
         return typeNode;
     }
 
+    @Override
+    public String getTagName() {
+        return "GridBag";
+    }
+
     private double[] calculateWeights(String input) {
         String[] values = input.split(" ");
         double[] weights = new double[input.length() + 1];

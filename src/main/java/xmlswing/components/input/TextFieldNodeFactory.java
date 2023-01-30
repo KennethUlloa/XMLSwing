@@ -33,4 +33,9 @@ public class TextFieldNodeFactory implements TypeNodeFactory<Component> {
         ComponentRepository.registerNode(typeNode, container);
         return typeNode;
     }
+
+    @Override
+    public String getTagName() {
+        return "TextField";
+    }
 }

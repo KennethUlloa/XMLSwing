@@ -5,6 +5,7 @@ import types.TypeContainer;
 import types.TypeNode;
 import types.TypeNodeFactory;
 import xmlswing.ComponentRepository;
+import xmlswing.components.ComponentNode;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,7 +17,7 @@ import java.util.Objects;
 public class FrameFactory implements TypeNodeFactory<Component> {
     @Override
     public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {
-        TypeNode<Component> typeNode = new TypeNode<Component>(node) {
+        TypeNode<Component> typeNode = new ComponentNode(node, container) {
             @Override
             public Component parseObject() {
                 JFrame frame = new JFrame();
@@ -68,16 +69,41 @@ public class FrameFactory implements TypeNodeFactory<Component> {
 
                 for (int i = 0; i < getNode().getChildNodes().getLength(); i++) {
                     Node child = getNode().getChildNodes().item(i);
-                    if (container.getFactory(child.getNodeName()) != null) {
-                        Component component = container.getFactory(child.getNodeName()).buildNode(child, container).getObject();
-                        frame.setContentPane((Container) component);
+                    if (child.getNodeName().equals("Content")) {
+                        loadContent(child, frame);
+                    }else if(getContainer().getFactory(child.getNodeName()) != null){
+                        Component component = getContainer().getFactory(child.getNodeName())
+                                .buildNode(child, getContainer()).getObject();
+                        if(component instanceof JMenuBar) {
+                            frame.setJMenuBar((JMenuBar) component);
+                        }
                     }
+
                 }
                 return frame;
+            }
+
+            private void loadContent(Node node, JFrame frame) {
+                for(int i = 0; i < node.getChildNodes().getLength() ; i++) {
+                    Node child = node.getChildNodes().item(i);
+                    if(getContainer().getFactory(child.getNodeName()) != null) {
+                        TypeNode<Component> typeNode1 = getContainer().getFactory(child.getNodeName())
+                                .buildNode(child, getContainer());
+                        frame.setContentPane((Container) typeNode1.getObject());
+                        break;
+                    }
+                }
             }
 
         };
         ComponentRepository.registerNode(typeNode, container);
         return typeNode;
     }
+
+    @Override
+    public String getTagName() {
+        return "Frame";
+    }
+
+
 }

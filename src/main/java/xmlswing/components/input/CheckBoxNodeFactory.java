@@ -29,4 +29,9 @@ public class CheckBoxNodeFactory implements TypeNodeFactory<Component> {
         ComponentRepository.registerNode(typeNode, container);
         return typeNode;
     }
+
+    @Override
+    public String getTagName() {
+        return "CheckBox";
+    }
 }

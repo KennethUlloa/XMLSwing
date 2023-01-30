@@ -28,4 +28,9 @@ public class ButtonNodeFactory implements types.TypeNodeFactory<Component> {
         PropertiesReader.setUpComponent(typeNode);
         return typeNode;
     }
+
+    @Override
+    public String getTagName() {
+        return "Button";
+    }
 }

@@ -27,4 +27,9 @@ public class TextAreaFactory implements TypeNodeFactory<Component> {
         PropertiesReader.setUpComponent(typeNode);
         return typeNode;
     }
+
+    @Override
+    public String getTagName() {
+        return "TextArea";
+    }
 }

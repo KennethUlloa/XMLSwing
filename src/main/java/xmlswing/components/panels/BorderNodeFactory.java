@@ -4,7 +4,9 @@ import org.w3c.dom.Node;
 import types.TypeContainer;
 import types.TypeNode;
 import types.TypeNodeFactory;
+import xmlswing.ComponentRepository;
 import xmlswing.components.ComponentNode;
+import xmlswing.components.PropertiesReader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +27,7 @@ public class BorderNodeFactory implements types.TypeNodeFactory<Component> {
                         panel.add(childNode.getObject(), fromNode(childNode));
                     }
                 }
-                return null;
+                return panel;
             }
 
             private String fromNode(TypeNode<Component> node) {
@@ -38,9 +40,17 @@ public class BorderNodeFactory implements types.TypeNodeFactory<Component> {
                         case "center": return BorderLayout.CENTER;
                     }
                 }
+                System.out.println(node.getAttribute("pos"));
                 return null;
             }
         };
-        return null;
+        ComponentRepository.registerNode(typeNode, container);
+        PropertiesReader.setUpComponent(typeNode);
+        return typeNode;
+    }
+
+    @Override
+    public String getTagName() {
+        return "Border";
     }
 }

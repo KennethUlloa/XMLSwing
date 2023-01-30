@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Border>
+    <Label font-style="bold" font-size="16" pos="top">Panel 1</Label>
+    <ScrollPane pos="center">
+        <TextArea/>
+    </ScrollPane>
+</Border>

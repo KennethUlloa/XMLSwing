@@ -44,4 +44,9 @@ public class LabelNodeFactory implements types.TypeNodeFactory<Component> {
         ComponentRepository.registerNode(typeNode, container);
         return typeNode;
     }
+
+    @Override
+    public String getTagName() {
+        return "Label";
+    }
 }

@@ -1,6 +1,5 @@
 package xmlswing.components;
 
-import org.w3c.dom.Node;
 import types.TypeNode;
 
 import javax.swing.*;
@@ -9,7 +8,6 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.util.HashMap;
 
 import static xmlswing.components.CommonProperties.getColor;
 
