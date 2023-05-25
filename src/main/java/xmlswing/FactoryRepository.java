@@ -29,6 +29,8 @@ public class FactoryRepository extends TypeRepository<TypeNodeFactory<Component>
         register(new MenuBarNodeFactory());
         register(new MenuNodeFactory());
         register(new MenuItemNodeFactory());
+        register(new TabbedPaneFactory());
+        register(new TabFactory());
     }
 
     private void register(TypeNodeFactory<Component> factory) {
