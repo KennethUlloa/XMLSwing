@@ -15,4 +15,8 @@ public class TypeRepository<T> {
     public T obtain(String id) {
         return repository.get(id);
     }
+
+    public <K> K obtain(String id, Class<K> clazz) {
+        return clazz.cast(repository.get(id));
+    }
 }

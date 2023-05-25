@@ -24,7 +24,7 @@ public class Main {
         JPanel panelB = (JPanel) panel2.getRootComponent();
         JPanel mainPanel = (JPanel) swing.getRepository().obtain("mainPanel");
 
-        ((JButton)swing.getRepository().obtain("anterior")).addActionListener(new ActionListener() {
+        swing.getRepository().obtain("anterior", JButton.class).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainPanel.remove(panelA);
