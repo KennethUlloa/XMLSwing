@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Frame
+        width="400"
+        height="500"
+        title="Developer Companies Search"
+        onclose="exit"
+>
+    <Content>
+        <Border>
+            <Label pos="top" h-align="center">Título</Label>
+            <TabPane pos="center">
+                <Flow tabName="Tab 1">
+                    <Label>Hola mundo 1!</Label>
+                </Flow>
+                <Flow tabName="Tab 2" id="tab2">
+                    <Label>Hola mundo 2!</Label>
+                </Flow>
+                <Flow tabName="Tab 3">
+                    <Label>Hola mundo 3!</Label>
+                </Flow>
+                <Flow>
+                    <Label>Hola mundo 4!</Label>
+                </Flow>
+            </TabPane>
+        </Border>
+
+    </Content>
+
+</Frame>
