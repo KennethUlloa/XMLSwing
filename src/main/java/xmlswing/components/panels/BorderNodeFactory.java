@@ -11,6 +11,17 @@ import xmlswing.components.PropertiesReader;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * <h3>Properties</h3>
+ * pos: (this is intended to be in the child nodes) <br>
+ * <ul>
+ *     <li>top</li>
+ *     <li>left</li>
+ *     <li>right</li>
+ *     <li>bottom</li>
+ *     <li>center</li>
+ * </ul>
+ */
 public class BorderNodeFactory implements types.TypeNodeFactory<Component> {
     @Override
     public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {

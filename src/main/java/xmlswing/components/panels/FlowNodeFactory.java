@@ -11,6 +11,10 @@ import xmlswing.components.ComponentNode;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * <h3>Properties</h3>
+ *
+ */
 public class FlowNodeFactory implements TypeNodeFactory<Component> {
     @Override
     public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {

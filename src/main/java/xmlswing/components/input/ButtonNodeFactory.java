@@ -21,9 +21,6 @@ public class ButtonNodeFactory implements types.TypeNodeFactory<Component> {
                 return button;
             }
         };
-        /*if(container != null && typeNode.hasAttribute("id")) {
-            container.getRepository().register(typeNode.getAttribute("id"), typeNode.getObject());
-        }*/
         ComponentRepository.registerNode(typeNode, container);
         PropertiesReader.setUpComponent(typeNode);
         return typeNode;

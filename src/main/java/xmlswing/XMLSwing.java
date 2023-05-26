@@ -14,6 +14,16 @@ import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * <h3>Usage</h3>
+ * 1. Instantiation<br/>
+ * XMLSwing main = new XMLSwing(...);<br/>
+ * 2. Building<br/>
+ * Object element = main.getRootElement();<br/>
+ * 3. Defining actions<br/>
+ * Object item = main.getRepository().obtain("id");<br/>
+ * item.addActionListener(...);
+ */
 
 public class XMLSwing implements TypeContainer<Component> {
     private ComponentRepository repository;
@@ -48,5 +58,9 @@ public class XMLSwing implements TypeContainer<Component> {
     @Override
     public TypeNodeFactory<Component> getFactory(String name) {
         return factoryRepository.obtain(name);
+    }
+
+    public <K> K getRootComponent(Class<K> clazz) throws ParserConfigurationException, IOException, SAXException {
+        return clazz.cast(getRootComponent());
     }
 }

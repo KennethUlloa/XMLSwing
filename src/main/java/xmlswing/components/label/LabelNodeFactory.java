@@ -10,6 +10,21 @@ import xmlswing.components.ComponentNode;
 import javax.swing.*;
 import java.awt.Component;
 
+/**
+ * <h3>Properties</h3>
+ * h-align: setHorizontalAlignment
+ * <ul>
+ *     <li>right</li>
+ *     <li>center</li>
+ *     <li>left</li>
+ * </ul>
+ * v-align: setVerticalAlignment
+ * <ul>
+ *     <li>top</li>
+ *     <li>center</li>
+ *     <li>bottom</li>
+ * </ul>
+ */
 public class LabelNodeFactory implements types.TypeNodeFactory<Component> {
     @Override
     public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {

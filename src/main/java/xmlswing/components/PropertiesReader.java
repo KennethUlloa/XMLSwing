@@ -11,6 +11,36 @@ import java.awt.*;
 
 import static xmlswing.components.CommonProperties.getColor;
 
+/**
+ * <h3>Properties</h3>
+ * <ul>
+ *     <li>color: foreground</li>
+ *     <li>padding: outer space</li>
+ *     <li>
+ *         border: none or three tuple
+ *          <ul>
+ *              <li>width: integer</li>
+ *              <li>style: (solid, dashed, double)</li>
+ *              <li>color: hex</li>
+ *          </ul>
+ *      </li>
+ *      <li>font-style: bold, italic</li>
+ *      <li>font-size: integer</li>
+ *      <li>font-family: font name</li>
+ *      <li>width: integer</li>
+ *      <li>height: integer</li>
+ *      <li>x: position </li>
+ *      <li>y: position </li>
+ *      <li>pref-width</li>
+ *      <li>pref-height</li>
+ *      <li>min-width</li>
+ *      <li>min-height</li>
+ *      <li>max-width</li>
+ *      <li>max-height</li>
+ *      <li>background: none or hex </li>
+ *
+ * </ul>
+ */
 public class PropertiesReader {
     private TypeNode<Component> node;
 
@@ -24,7 +54,6 @@ public class PropertiesReader {
     }
 
     public void setUpComponent() {
-        //HashMap<String, String> styles = readStyle(node);
         setPosition();
         setSize();
         setPreferredSize();
@@ -39,11 +68,13 @@ public class PropertiesReader {
         setForeground();
 
     }
+
     public void setForeground() {
         if(!node.hasAttribute("color")) return;
         Component component = node.getObject();
         component.setForeground(getColor(node.getAttribute("color")));
     }
+
     public void setPadding() {
         if(!node.hasAttribute("padding") || !(node.getObject() instanceof JComponent)) return;
         JComponent component = (JComponent) node.getObject();
@@ -80,6 +111,7 @@ public class PropertiesReader {
             )); break;
         }
     }
+
     public void setFontStyle() {
         if(!node.hasAttribute("font-style")) return;
         int op = Font.PLAIN;
@@ -90,6 +122,7 @@ public class PropertiesReader {
         Component component = node.getObject();
         component.setFont(component.getFont().deriveFont(op));
     }
+
     public void setFontSize() {
         if(!node.hasAttribute("font-size")) return;
         float size = Float.parseFloat(node.getAttribute("font-size"));
@@ -115,6 +148,7 @@ public class PropertiesReader {
             } catch (NumberFormatException ignored) {}
         }
     }
+
     public void setPosition() {
         Component component = node.getObject();
         if(node.hasAttribute("x")){
@@ -129,14 +163,14 @@ public class PropertiesReader {
 
     public void setPreferredSize() {
         Component component = node.getObject();
-        if(node.hasAttribute("max-width")) {
+        if(node.hasAttribute("pref-width")) {
             try {component.setPreferredSize(new Dimension(
-                    Integer.parseInt(node.getAttribute("max-width")), component.getPreferredSize().height));
+                    Integer.parseInt(node.getAttribute("pref-width")), component.getPreferredSize().height));
             } catch (NumberFormatException ignored) {}
         }
-        if(node.hasAttribute("max-height")) {
+        if(node.hasAttribute("pref-height")) {
             try {component.setPreferredSize(new Dimension(
-                    component.getPreferredSize().width, Integer.parseInt(node.getAttribute("max-height"))));
+                    component.getPreferredSize().width, Integer.parseInt(node.getAttribute("pref-height"))));
             } catch (NumberFormatException ignored) {}
         }
     }

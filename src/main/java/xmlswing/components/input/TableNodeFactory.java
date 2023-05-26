@@ -14,6 +14,13 @@ import javax.swing.table.TableModel;
 import java.awt.Component;
 import java.util.ArrayList;
 
+/**
+ * <h3>Properties</h3>
+ * It has a similar structure to HTML tables but limited to th, tr, td <br>
+ * th (row for headers)<br>
+ * td (data)<br>
+ * tr (row for data) <br>
+ */
 public class TableNodeFactory implements TypeNodeFactory<Component> {
     @Override
     public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {

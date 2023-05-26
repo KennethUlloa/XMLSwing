@@ -10,6 +10,10 @@ import xmlswing.components.ComponentNode;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * <h3>Properties</h3>
+ * cols: number of columns to display
+ */
 public class TextFieldNodeFactory implements TypeNodeFactory<Component> {
     @Override
     public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {

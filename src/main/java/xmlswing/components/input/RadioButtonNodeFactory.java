@@ -12,6 +12,18 @@ import xmlswing.components.CustomButtonGroup;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * <h3>Properties</h3>
+ * selected:
+ * <ul>
+ *     <li>true</li>
+ *     <li>false (or anything else)</li>
+ * </ul>
+ * group:
+ * <ul>
+ *     <li>The name of the corresponding group</li>
+ * </ul>
+ */
 public class RadioButtonNodeFactory implements TypeNodeFactory<Component> {
     @Override
     public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {
@@ -22,7 +34,7 @@ public class RadioButtonNodeFactory implements TypeNodeFactory<Component> {
                 JRadioButton radioButton = new JRadioButton();
                 radioButton.setText(getNode().getTextContent().trim());
                 if(hasAttribute("selected")) {
-                    radioButton.setSelected(true);
+                    radioButton.setSelected(getAttribute("selected").equals("true"));
                 }
                 if(hasAttribute("group")) {
                     CustomButtonGroup group = (CustomButtonGroup) getContainer().getRepository().obtain(getAttribute("group"));

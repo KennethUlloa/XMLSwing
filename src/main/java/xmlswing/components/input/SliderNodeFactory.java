@@ -10,7 +10,21 @@ import xmlswing.components.PropertiesReader;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * <h3>Properties</h3>
+ * min:
+ * <ul>
+ *     <li>Minimum value for the slider</li>
+ * </ul>
+ * max:
+ * <ul>
+ *     <li>Maximum value for the slider</li>
+ * </ul>
+ * value:
+ * <ul>
+ *     <li>Current value for the slider</li>
+ * </ul>
+ */
 public class SliderNodeFactory implements types.TypeNodeFactory<Component> {
     @Override
     public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {

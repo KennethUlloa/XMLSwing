@@ -11,6 +11,25 @@ import xmlswing.components.ComponentNode;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * <h3>Properties</h3>
+ * <ul>
+ *     <li>
+ *         h-policy
+ *         <ul>
+ *             <li>always</li>
+ *             <li>never</li>
+ *         </ul>
+ *     </li>
+ *     <li>
+ *         v-policy
+ *         <ul>
+ *             <li>always</li>
+ *             <li>never</li>
+ *         </ul>
+ *     </li>
+ * </ul>
+ */
 public class ScrollPaneNodeFactory implements TypeNodeFactory<Component> {
     @Override
     public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {

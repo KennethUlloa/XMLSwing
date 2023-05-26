@@ -11,6 +11,14 @@ import xmlswing.components.ComponentNode;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * <h3>Properties</h3>
+ * selected:
+ * <ul>
+ *     <li>true</li>
+ *     <li>false (or anything else)</li>
+ * </ul>
+ */
 public class CheckBoxNodeFactory implements TypeNodeFactory<Component> {
     @Override
     public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {
@@ -20,7 +28,7 @@ public class CheckBoxNodeFactory implements TypeNodeFactory<Component> {
                 JCheckBox checkBox = new JCheckBox();
                 checkBox.setText(getNode().getTextContent().trim());
                 if(hasAttribute("selected")) {
-                    checkBox.setSelected(true);
+                    checkBox.setSelected(getAttribute("selected").equals("true"));
                 }
                 return checkBox;
             }

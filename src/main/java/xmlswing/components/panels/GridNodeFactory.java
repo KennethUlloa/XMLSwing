@@ -11,6 +11,15 @@ import xmlswing.components.PropertiesReader;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * <h3>Properties</h3>
+ * <ul>
+ *     <li>rows</li>
+ *     <li>columns</li>
+ *     <li>h-gap</li>
+ *     <li>v-gap</li>
+ * </ul>
+ */
 public class GridNodeFactory implements types.TypeNodeFactory<java.awt.Component> {
     @Override
     public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {

@@ -38,5 +38,18 @@ public abstract class TypeNode<T> {
     }
     public abstract T parseObject();
 
+    public static boolean hasAttribute(Node node, String attribute) {
+        return node.getAttributes().getNamedItem(attribute) != null;
+    }
 
+    public static String getAttribute(Node node, String attribute) {
+        if (TypeNode.hasAttribute(node, attribute)) {
+            return node.getAttributes().getNamedItem(attribute).getNodeValue();
+        }
+        return null;
+    }
+
+    public static boolean shouldIgnore(Node node) {
+        return node.getNodeName().equals("#text") || node.getNodeName().equals("#comment");
+    }
 }

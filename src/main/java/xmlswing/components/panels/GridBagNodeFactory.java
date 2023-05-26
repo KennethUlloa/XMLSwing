@@ -12,6 +12,39 @@ import xmlswing.components.ComponentNode;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * <h3>Properties</h3>
+ * <ul>
+ *     <li>row-weights: values separated by space e: ("0 0 1 0 1")</li>
+ *     <li>column-weights: values separated by space e: ("0 0 1 0 1")</li>
+ *     <li>rows: values separated by space e: ("0 0 1 0 1")</li>
+ *     <li>columns: values separated by space e: ("0 0 1 0 1")</li>
+ * </ul>
+ * A child node may define any or all of the following attributes in order to define its own position
+ * <ul>
+ *     <li>col: X axis position</li>
+ *     <li>row: Y axis position</li>
+ *     <li>fill: horizontal, vertical of both</li>
+ *     <li>col-span: columns to be taken</li>
+ *     <li>row-span: rows to be taken</li>
+ *     <li>
+ *         anchor: position in its cell
+ *         <ul>
+ *             <li>top</li>
+ *             <li>top-left</li>
+ *             <li>top-right</li>
+ *             <li>bottom</li>
+ *             <li>bottom-left</li>
+ *             <li>bottom-right</li>
+ *             <li>left</li>
+ *             <li>right</li>
+ *             <li>center</li>
+ *         </ul>
+ *     </li>
+ *     <li>insets: interior space, e: ("0 10 34 6)</li>
+ * </ul>
+ *
+ */
 public class GridBagNodeFactory implements TypeNodeFactory<Component> {
     @Override
     public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {
@@ -81,6 +114,31 @@ public class GridBagNodeFactory implements TypeNodeFactory<Component> {
         return widths;
     }
 
+    /**
+     * <ul>
+     *     <li>col: X axis position</li>
+     *     <li>row: Y axis position</li>
+     *     <li>fill: horizontal, vertical of both</li>
+     *     <li>col-span: columns to be taken</li>
+     *     <li>row-span: rows to be taken</li>
+     *     <li>
+     *         anchor: position in its cell
+     *         <ul>
+     *             <li>top</li>
+     *             <li>top-left</li>
+     *             <li>top-right</li>
+     *             <li>bottom</li>
+     *             <li>bottom-left</li>
+     *             <li>bottom-right</li>
+     *             <li>left</li>
+     *             <li>right</li>
+     *             <li>center</li>
+     *         </ul>
+     *     </li>
+     *     <li>insets: interior space, e: ("0 10 34 6)</li>
+     * </ul>
+     */
+
     private GridBagConstraints getConstraints(TypeNode<Component> node) {
         GridBagConstraints constraints = new GridBagConstraints();
         if(node.hasAttribute("col")) {
@@ -122,6 +180,7 @@ public class GridBagNodeFactory implements TypeNodeFactory<Component> {
                 case "top-right": constraints.anchor = GridBagConstraints.NORTHEAST; break;
                 case "bottom": constraints.anchor = GridBagConstraints.SOUTH; break;
                 case "bottom-right": constraints.anchor = GridBagConstraints.SOUTHEAST; break;
+                case "center": constraints.anchor = GridBagConstraints.CENTER;
             }
         }
         if(node.hasAttribute("insets")) {

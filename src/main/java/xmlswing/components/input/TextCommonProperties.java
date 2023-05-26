@@ -6,6 +6,12 @@ import types.TypeNode;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
 
+/**
+ * <h3>Properties</h3>
+ * selection: color of the selection (hex) <br>
+ * caret: color of the caret (hex) <br>
+ * selected-text:color of the text inside of the selection <br>
+ */
 public class TextCommonProperties {
     public static void setUpComponent(JTextComponent textComponent, TypeNode<Component> node) {
         setCaret(textComponent, node);
@@ -23,8 +29,8 @@ public class TextCommonProperties {
         }
     }
     private static void setSelectedTextColor(JTextComponent textComponent, TypeNode<Component> node) {
-        if(node.hasAttribute("selection-color")) {
-            textComponent.setSelectedTextColor(CommonProperties.getColor(node.getAttribute("selection-color")));
+        if(node.hasAttribute("selected-text")) {
+            textComponent.setSelectedTextColor(CommonProperties.getColor(node.getAttribute("selected-text")));
         }
     }
 }

@@ -2,6 +2,25 @@ package xmlswing.components;
 
 import java.awt.*;
 
+/**
+ * <h3>Properties</h3>
+ * Color:
+ * <ul>
+ *      <li>yellow</li>
+ *      <li>blue</li>
+ *      <li>red</li>
+ *      <li>green</li>
+ *      <li>orange</li>
+ *      <li>gray</li>
+ *      <li>lightgray</li>
+ *      <li>cyan</li>
+ *      <li>darkgray</li>
+ *      <li>black</li>
+ *      <li>white</li>
+ *      <li>magenta</li>
+ *      <li>pink</li>
+ * </ul>
+ */
 public class CommonProperties {
     public static Dimension dimensionFromString(String string) {
         return dimensionFromString(string, false);
