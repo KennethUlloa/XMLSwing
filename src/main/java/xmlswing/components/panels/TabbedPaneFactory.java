@@ -4,8 +4,10 @@ import org.w3c.dom.Node;
 import types.TypeContainer;
 import types.TypeNode;
 import types.TypeNodeFactory;
+import xmlswing.ComponentRepository;
 import xmlswing.FactoryRepository;
 import xmlswing.components.ComponentNode;
+import xmlswing.components.PropertiesReader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,6 +42,8 @@ public class TabbedPaneFactory implements TypeNodeFactory<Component> {
                 return tabbedPane;
             }
         };
+        ComponentRepository.registerNode(typeNode, container);
+        PropertiesReader.setUpComponent(typeNode);
         return typeNode;
     }
     @Override
