@@ -1,11 +1,10 @@
 package xmlswing.components.input;
 
+import xmlswing.XMLSwing;
 import xmlswing.components.models.XMLTableModel;
 import org.w3c.dom.Node;
-import types.TypeContainer;
-import types.TypeNode;
-import types.TypeNodeFactory;
-import xmlswing.ComponentRepository;
+import xmlswing.types.TypeNode;
+import xmlswing.types.TypeNodeFactory;
 import xmlswing.components.PropertiesReader;
 import xmlswing.components.ComponentNode;
 
@@ -21,9 +20,9 @@ import java.util.ArrayList;
  * td (data)<br>
  * tr (row for data) <br>
  */
-public class TableNodeFactory implements TypeNodeFactory<Component> {
+public class TableNodeFactory implements TypeNodeFactory<Component, XMLSwing> {
     @Override
-    public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {
+    public TypeNode<Component> buildNode(Node node, XMLSwing container) {
         TypeNode<Component> typeNode = new ComponentNode(node, container) {
             @Override
             public Component parseObject() {
@@ -61,7 +60,7 @@ public class TableNodeFactory implements TypeNodeFactory<Component> {
             }
         };
         PropertiesReader.setUpComponent(typeNode);
-        ComponentRepository.registerNode(typeNode, container);
+        container.registerNode(typeNode);
         return typeNode;
     }
 

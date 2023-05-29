@@ -1,6 +1,6 @@
 package xmlswing.components;
 
-import types.TypeNode;
+import xmlswing.types.TypeNode;
 
 import javax.swing.*;
 import javax.swing.border.Border;

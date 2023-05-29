@@ -1,29 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Frame
-        width="400"
+        width="600"
         height="500"
-        title="Developer Companies Search"
+        title="App"
         onclose="exit"
 >
     <Content>
-        <Border>
-            <Label pos="top" h-align="center">Título</Label>
-            <TabPane pos="center">
-                <Flow tabName="Tab 1">
-                    <Label>Hola mundo 1!</Label>
-                </Flow>
-                <Flow tabName="Tab 2" id="tab2">
-                    <Label>Hola mundo 2!</Label>
-                </Flow>
-                <Flow tabName="Tab 3">
-                    <Label>Hola mundo 3!</Label>
-                </Flow>
-                <Flow>
-                    <Label>Hola mundo 4!</Label>
-                </Flow>
-            </TabPane>
-        </Border>
+        <TabPane>
+            <GridBag tabName="Compañías" row-weights="0 1" rows="0 1" column-weights="0.2 ">
+                <GridBag  column-weights="0 1" columns="0 1" insets="15" rows="0 0 0 0 0 0"
+                          row-weights="0 0 0 0 0 0">
+                    <Label row="0" col="0" font-style="bold">Nombre</Label>
+                    <TextField row="0" col="1" fill="horizontal" id="nombre" cols="10" padding="5"/>
+                    <Label row="1" column="0" font-style="bold">Año</Label>
+                    <TextField row="1" col="1" fill="horizontal" id="anio">${year}</TextField>
+                    <Label row="2" column="0" font-style="bold">Slogan</Label>
+                    <TextField row="2" col="1" fill="horizontal" id="slogan"/>
+                    <Label row="3" column="0" font-style="bold">Url</Label>
+                    <TextField row="3" col="1" fill="horizontal" id="url" />
+                    <Label row="4" col="0" font-style="bold">Ubicación</Label>
+                    <TextField row="4" col="1" fill="horizontal" id="ubicacion" />
+                    <Flow row="5" col="1" fill="horizontal" layout="right">
+                        <Button id="guardar">Guardar</Button>
+                        <Button id="cancelar">Cancelar</Button>
+                    </Flow>
+                </GridBag>
+                <ScrollPane row="1" fill="both">
+                    <Table>
+                        <th>
+                            <td>Nombre</td>
+                            <td>Año</td>
+                            <td>Ubicación</td>
+                            <td>Slogan</td>
+                            <td>Url</td>
+                        </th>
+                    </Table>
+                </ScrollPane>
+            </GridBag>
 
+            <GridBag tabName="Videojuegos">
+            </GridBag>
+
+        </TabPane>
     </Content>
-
 </Frame>

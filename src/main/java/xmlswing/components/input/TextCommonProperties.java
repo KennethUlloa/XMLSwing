@@ -1,7 +1,7 @@
 package xmlswing.components.input;
 
 import xmlswing.components.CommonProperties;
-import types.TypeNode;
+import xmlswing.types.TypeNode;
 
 import javax.swing.text.JTextComponent;
 import java.awt.*;

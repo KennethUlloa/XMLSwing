@@ -1,18 +1,18 @@
 package xmlswing.components.input;
 
 import org.w3c.dom.Node;
-import types.TypeContainer;
-import types.TypeNode;
-import xmlswing.ComponentRepository;
+import xmlswing.types.TypeNode;
+import xmlswing.XMLSwing;
 import xmlswing.components.PropertiesReader;
 import xmlswing.components.ComponentNode;
+import xmlswing.types.TypeNodeFactory;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ButtonNodeFactory implements types.TypeNodeFactory<Component> {
+public class ButtonNodeFactory implements TypeNodeFactory<Component, XMLSwing> {
     @Override
-    public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {
+    public TypeNode<Component> buildNode(Node node, XMLSwing container) {
         TypeNode<Component> typeNode = new ComponentNode(node, container) {
             @Override
             public Component parseObject() {
@@ -21,7 +21,7 @@ public class ButtonNodeFactory implements types.TypeNodeFactory<Component> {
                 return button;
             }
         };
-        ComponentRepository.registerNode(typeNode, container);
+        container.registerNode(typeNode);
         PropertiesReader.setUpComponent(typeNode);
         return typeNode;
     }

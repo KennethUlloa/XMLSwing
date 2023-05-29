@@ -1,12 +1,10 @@
 package xmlswing.components.input;
 
 import org.w3c.dom.Node;
-import types.TypeContainer;
-import types.TypeNode;
-import xmlswing.ComponentRepository;
-import xmlswing.components.CommonProperties;
+import xmlswing.types.TypeNode;
 import xmlswing.components.ComponentNode;
 import xmlswing.components.PropertiesReader;
+import xmlswing.types.TypeNodeFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +23,7 @@ import java.awt.*;
  *     <li>Current value for the slider</li>
  * </ul>
  */
-public class SliderNodeFactory implements types.TypeNodeFactory<Component> {
+public class SliderNodeFactory implements TypeNodeFactory<Component> {
     @Override
     public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {
         TypeNode<Component> typeNode = new ComponentNode(node, container) {

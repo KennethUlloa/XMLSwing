@@ -1,11 +1,10 @@
 package xmlswing.components.label;
 
 import org.w3c.dom.Node;
-import types.TypeContainer;
-import types.TypeNode;
-import xmlswing.ComponentRepository;
+import xmlswing.types.TypeNode;
 import xmlswing.components.PropertiesReader;
 import xmlswing.components.ComponentNode;
+import xmlswing.types.TypeNodeFactory;
 
 import javax.swing.*;
 import java.awt.Component;
@@ -25,7 +24,7 @@ import java.awt.Component;
  *     <li>bottom</li>
  * </ul>
  */
-public class LabelNodeFactory implements types.TypeNodeFactory<Component> {
+public class LabelNodeFactory implements TypeNodeFactory<Component> {
     @Override
     public TypeNode<Component> buildNode(Node node, TypeContainer<Component> container) {
         TypeNode<Component> typeNode = new ComponentNode(node, container) {

@@ -1,4 +1,4 @@
-package types;
+package xmlswing.types;
 
 import java.util.HashMap;
 

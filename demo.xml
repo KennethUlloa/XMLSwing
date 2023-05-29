@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Frame
-    width="400"
-    height="600"
-    title="Hey!!"
-    onclose="exit"
-    icon="res:/icon.png">
-    <MenuBar>
-        <Menu title="Archivo">
-            <MenuItem title="Guardar" id="guardarOp"/>
-        </Menu>
-        <Menu title="Editar">
-            <MenuItem title="Deshacer"/>
-        </Menu>
-    </MenuBar>
+        width="600"
+        height="500"
+        title="App"
+        onclose="exit"
+>
     <Content>
-        <Border id="mainPanel" border="2 solid red">
-            <Flow pos="bottom">
-                <Button id="anterior">Anterior</Button>
-                <Button id="siguiente">Siguiente</Button>
-            </Flow>
-        </Border>
+
+            <GridBag tabName="Compañías" column-weights="0 1" columns="0 1"
+                     border="2 solid red"
+            >
+                <Label row="0" column="0" font-style="bold" border="10 solid red" >Nombre</Label>
+                <TextField row="0" column="1" fill="horizontal" id="nombre" cols="10"/>
+                <Label row="1" column="0" font-style="bold">Año</Label>
+                <TextField row="1" column="1" fill="horizontal" id="anio"/>
+                <Label row="2" column="0" font-style="bold">Slogan</Label>
+                <TextField row="2" column="1" fill="horizontal" id="slogan"/>
+                <Label row="3" column="0" font-style="bold">Url</Label>
+                <TextField row="3" column="1" fill="horizontal" id="url" />
+                <Label row="4" column="0" font-style="bold">Ubicación</Label>
+                <Flow row="5" column="3" fill="horizontal" border="2 solid red">
+                    <Button id="guardar">Guardar</Button>
+                    <Button id="cancelar">Cancelar</Button>
+                </Flow>
+                <TextField row="4" column="1" fill="horizontal" id="ubicacion" />
+
+            </GridBag>
+
+
+
     </Content>
 </Frame>

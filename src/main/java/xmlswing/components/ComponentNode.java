@@ -2,9 +2,7 @@ package xmlswing.components;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import types.TypeContainer;
-import types.TypeNode;
-import types.TypeRepository;
+import xmlswing.types.TypeNode;
 import xmlswing.XMLSwing;
 
 import java.awt.*;
@@ -12,8 +10,8 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public abstract class ComponentNode extends TypeNode<Component> {
-    private TypeContainer<Component> container;
-    public ComponentNode(Node node, TypeContainer<Component> container) {
+    private XMLSwing container;
+    public ComponentNode(Node node, XMLSwing container) {
         super(node);
         this.container = container;
     }
@@ -24,7 +22,7 @@ public abstract class ComponentNode extends TypeNode<Component> {
                 .mapToObj(nodeList::item);
     }
 
-    public TypeContainer<Component> getContainer() {
+    public XMLSwing getContainer() {
         return container;
     }
 }

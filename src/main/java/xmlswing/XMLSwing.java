@@ -1,17 +1,9 @@
 package xmlswing;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
-import types.TypeContainer;
-import types.TypeNodeFactory;
-import types.TypeRepository;
+import xmlswing.repositories.ObjectRepository;
+import xmlswing.utils.VariableProcessor;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -25,23 +17,43 @@ import java.io.InputStream;
  * item.addActionListener(...);
  */
 
-public class XMLSwing implements TypeContainer<Component> {
-    private ComponentRepository repository;
-    private FactoryRepository factoryRepository;
+public class XMLSwing<T extends Component> {
+
     private InputStream stream;
-    private Component rootComponent;
+    private T rootComponent;
+    private VariableProcessor variableProcessor;
+    private ObjectRepository objects;
+
     public XMLSwing(InputStream inputStream) {
         this.stream = inputStream;
-        repository = new ComponentRepository();
-        factoryRepository = new FactoryRepository();
+        variableProcessor = new VariableProcessor(stream);
     }
+
+    public void registerElement(String key, Object c) {
+        objects.register(key, c);
+    }
+
+    public Object getElement(String key) {
+        return objects.obtain(key);
+    }
+
+    public <K> K getElement(String key, Class<K> c) {
+        return objects.obtain(key, c);
+    }
+
+    /*
+
+    public VariableProcessor getVariableProcessor() {
+        return variableProcessor;
+    }
+
     private Component build() throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
-        Document doc = db.parse(stream);
+        Document doc = db.parse(variableProcessor.process());
         doc.getDocumentElement().normalize();
         Element root = doc.getDocumentElement();
-        return factoryRepository.obtain(root.getNodeName()).buildNode(root, this).getObject();
+        return (Component) factoryRepository.obtain(root.getNodeName()).buildNode(root, this).getObject();
     }
     public Component getRootComponent() throws ParserConfigurationException, IOException, SAXException {
         if(rootComponent == null) {
@@ -50,17 +62,25 @@ public class XMLSwing implements TypeContainer<Component> {
         return rootComponent;
     }
 
-    @Override
+
     public TypeRepository<Component> getRepository() {
         return repository;
     }
 
-    @Override
-    public TypeNodeFactory<Component> getFactory(String name) {
+    public TypeNodeFactory<Component, XMLSwing> getFactory(String name) {
         return factoryRepository.obtain(name);
     }
 
     public <K> K getRootComponent(Class<K> clazz) throws ParserConfigurationException, IOException, SAXException {
         return clazz.cast(getRootComponent());
     }
+
+    public void registerNode(TypeNode<Component> node) {
+        if(node != null ) {
+            if(node.hasAttribute("id")) {
+                getRepository().register(node.getAttribute("id"), node.getObject());
+            }
+        }
+    }*/
+
 }

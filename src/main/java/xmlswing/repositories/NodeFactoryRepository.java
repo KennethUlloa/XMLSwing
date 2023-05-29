@@ -1,16 +1,25 @@
-package xmlswing;
+package xmlswing.repositories;
 
-import types.TypeNodeFactory;
-import types.TypeRepository;
+import xmlswing.XMLSwing;
+import xmlswing.types.TypeNodeFactory;
+import xmlswing.types.TypeRepository;
 import xmlswing.components.input.*;
 import xmlswing.components.label.LabelNodeFactory;
+import xmlswing.components.menu.bar.MenuBarNodeFactory;
+import xmlswing.components.menu.MenuNodeFactory;
 import xmlswing.components.panels.*;
-import xmlswing.components.windows.FrameFactory;
+import xmlswing.components.panels.border.BorderNodeFactory;
+import xmlswing.components.panels.flow.FlowNodeFactory;
+import xmlswing.components.panels.grid.GridBagNodeFactory;
+import xmlswing.components.panels.grid.GridNodeFactory;
+import xmlswing.components.frames.FrameFactory;
 
 import java.awt.*;
 
-public class FactoryRepository extends TypeRepository<TypeNodeFactory<Component>> {
-    public FactoryRepository() {
+public class NodeFactoryRepository extends TypeRepository<TypeNodeFactory<Component, XMLSwing<?>>> {
+    private static NodeFactoryRepository instance = new NodeFactoryRepository();
+    private NodeFactoryRepository() {
+
         register(new FlowNodeFactory());
         register(new ButtonNodeFactory());
         register(new FrameFactory());
@@ -31,9 +40,15 @@ public class FactoryRepository extends TypeRepository<TypeNodeFactory<Component>
         register(new MenuItemNodeFactory());
         register(new TabbedPaneFactory());
         register(new TabFactory());
+
     }
 
-    private void register(TypeNodeFactory<Component> factory) {
-        register(factory.getTagName(), factory);
+    public static void register(TypeNodeFactory<Component, XMLSwing<?>> factory) {
+        instance.register(factory.getTagName(), factory);
     }
+
+    public static TypeNodeFactory<Component, XMLSwing<?>> get(String key) {
+        return instance.obtain(key);
+    }
+
 }

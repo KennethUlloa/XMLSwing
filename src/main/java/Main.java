@@ -15,14 +15,9 @@ import java.nio.file.Paths;
 public class Main {
     public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException, UnsupportedLookAndFeelException {
         XMLSwing swing = new XMLSwing(Main.class.getResourceAsStream("gui.xml"));
-        JFrame frame = (JFrame) swing.getRootComponent();
-
+        swing.getVariableProcessor().set("year","2018");
+        JFrame frame = swing.getRootComponent(JFrame.class);
         frame.setVisible(true);
-
-
-
-
-
 
     }
 }

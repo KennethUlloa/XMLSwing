@@ -1,13 +1,15 @@
-package types;
+package xmlswing.types;
 
 import org.w3c.dom.Node;
 
-public abstract class TypeNode<T> {
+public abstract class TypeNode<T, K> {
     private Node node;
+    private K context;
     private T object;
 
-    public TypeNode(Node node) {
+    public TypeNode(Node node, K context) {
         this.node = node;
+        this.context = context;
         //loadAttributes();
     }
 
@@ -51,5 +53,27 @@ public abstract class TypeNode<T> {
 
     public static boolean shouldIgnore(Node node) {
         return node.getNodeName().equals("#text") || node.getNodeName().equals("#comment");
+    }
+
+    public Node firstTagChild(String tag) {
+        for(int i = 0; i < getNode().getChildNodes().getLength() ; i++) {
+            Node n = getNode().getChildNodes().item(i);
+            if (tag == null) {
+              if (!shouldIgnore()) {
+                  return n;
+              }
+            } else if (n.getNodeName().equals(tag)) {
+                return n;
+            }
+        }
+        return null;
+    }
+
+    public Node fistTagChild() {
+        return firstTagChild(null);
+    }
+
+    public K getContext() {
+        return context;
     }
 }

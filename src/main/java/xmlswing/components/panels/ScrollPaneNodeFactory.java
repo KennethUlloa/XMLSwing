@@ -1,10 +1,8 @@
 package xmlswing.components.panels;
 
 import org.w3c.dom.Node;
-import types.TypeContainer;
-import types.TypeNode;
-import types.TypeNodeFactory;
-import xmlswing.ComponentRepository;
+import xmlswing.types.TypeNode;
+import xmlswing.types.TypeNodeFactory;
 import xmlswing.components.PropertiesReader;
 import xmlswing.components.ComponentNode;
 

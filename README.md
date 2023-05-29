@@ -3,7 +3,7 @@ XML based Swing UI elements for Java.\
 The goal is to separate GUI and business logic as much as it is possible, reduce the time needed to create a basic interface without the need of "drag and drop" tools for GUI implementation
 ## List of components
 Components are listed as it follows *XML tag (Swing Component)*
-Boxed
+
 <table>
 <tr>
 <th>XML tag</th><th>Swing Element</th>
@@ -53,6 +53,9 @@ Boxed
 <tr>
 <td>Table</td><td>JTable</td>
 </tr>
+<tr>
+<td>TabPane</td><td>JTabbedPane</td>
+</tr>
 </table>
 
 ## Capabilities
@@ -60,24 +63,38 @@ XMLSwing allows you to:
 - Retrieve elements by id (only for those elements with this attribute)
 - Specify common and specific attributes directly in XML (width, height, background, etc...)
 - Define and register your own tags for custom elements (create a customized factory is required in order to use this feature)
-- Parse simple variables in your XML following the next format: {#variable_name#}
+
 ## Usage
 Lifecycle:
-1. Create MockFactoy object
-2. Register custom factory objects *(optional)*
-3. Generate the frame
-4. Retrieve objects by id *(optional)*
+1. Create XMLSwing object
+2. Call the method `getRootComponent()`
+3. *(Optional)* From the XMLSwing created object use `getRepository().obtain("component_id")` to retrieve objects within the root component. 
+
 
 In Java code
+
 ```java
-MockFactory mockMaker = new MockFactory(Files.newInputStream(Paths.get("./afile.xml"))); //This accepts InputStream objects
-//Before the actual construction of GUI if you're going to use custom element factory you
-//must register it with MockElementFactory.register("tag",custom_element_factory_instance);
-//Example: MockElementFactory("Button", new ButtonFactory()); <- this will parse <Button> tags using ButtonFactory object        
-mockMaker.generateFrame();
-//Retrieve elements (if needed)
+import javax.swing.*;
+import java.awt.*;
+
+public class MyPanel extends JPanel {
+    public MyPanel() {
+        setLayout(new GridLayout(3, 3, 5, 5));
+        JLabel label = new JLabel("Label 1");
+        JLabel label2 = new JLabel("Label 3");
+        JButton button = new JButton("Click me!");
+        add(label);
+        add(label2);
+        add(button);
+    }
+}
+//More code ...
 ```
 In XML
 ```xml
-<Button>Something</Button>
+<Grid rows="3" columns="3" h-gap="5" v-gap="5">
+    <Label>Label 1</Label>
+    <Label>Label 3</Label>
+    <Button>Click me!</Button>
+</Grid>
 ```
