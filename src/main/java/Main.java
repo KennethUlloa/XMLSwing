@@ -1,5 +1,7 @@
 import org.xml.sax.SAXException;
 import xmlswing.XMLSwing;
+import xmlswing.components.form.EmptyValueNotAllowedException;
+import xmlswing.components.form.Form;
 
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
@@ -14,9 +16,15 @@ import java.nio.file.Paths;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException, UnsupportedLookAndFeelException {
-        XMLSwing swing = new XMLSwing(Main.class.getResourceAsStream("gui.xml"));
-        swing.getVariableProcessor().set("year","2018");
-        JFrame frame = swing.getRootComponent(JFrame.class);
+        XMLSwing<JFrame> swing = new XMLSwing<>(Main.class.getResourceAsStream("gui.xml"));
+        JFrame frame = swing.getRootComponent();
+        swing.getElement("guardar", JButton.class).addActionListener(a -> {
+            try {
+                System.out.println(swing.getElement("obj", Form.class).getValues());
+            } catch (EmptyValueNotAllowedException e) {
+                JOptionPane.showMessageDialog(frame, e.getMessage(), "Form", JOptionPane.ERROR_MESSAGE);
+            }
+        });
         frame.setVisible(true);
 
     }

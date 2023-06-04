@@ -17,7 +17,7 @@ public class MenuItemNode extends AbstractNode<JMenuItem> {
     }
 
     @Override
-    public JMenuItem getParentElement() {
+    public JMenuItem getRootElement() {
         JMenuItem menuItem = new JMenuItem();
         if(hasAttribute("keys")) {
             menuItem.setAccelerator(KeyStroke.getKeyStroke(getAttribute("keys")));

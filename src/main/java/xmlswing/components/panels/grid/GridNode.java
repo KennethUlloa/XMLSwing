@@ -25,7 +25,7 @@ public class GridNode extends AbstractNode<JPanel> {
     }
 
     @Override
-    public JPanel getParentElement() {
+    public JPanel getRootElement() {
         JPanel panel = new JPanel();
         GridLayout layout = new GridLayout();
         panel.setLayout(layout);

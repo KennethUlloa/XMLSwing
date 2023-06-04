@@ -1,9 +1,18 @@
 package xmlswing.repositories;
 
 import xmlswing.XMLSwing;
+import xmlswing.components.input.button.ButtonNodeFactory;
+import xmlswing.components.input.selection.CheckBoxNodeFactory;
+import xmlswing.components.input.selection.ComboBoxNodeFactory;
+import xmlswing.components.input.selection.RadioButtonNodeFactory;
+import xmlswing.components.input.selection.SliderNodeFactory;
+import xmlswing.components.input.table.TableNodeFactory;
+import xmlswing.components.input.text.TextAreaNodeFactory;
+import xmlswing.components.input.text.TextFieldNodeFactory;
+import xmlswing.components.menu.item.MenuItemNodeFactory;
+import xmlswing.components.panels.tabpane.TabbedPaneFactory;
 import xmlswing.types.TypeNodeFactory;
 import xmlswing.types.TypeRepository;
-import xmlswing.components.input.*;
 import xmlswing.components.label.LabelNodeFactory;
 import xmlswing.components.menu.bar.MenuBarNodeFactory;
 import xmlswing.components.menu.MenuNodeFactory;
@@ -17,38 +26,46 @@ import xmlswing.components.frames.FrameFactory;
 import java.awt.*;
 
 public class NodeFactoryRepository extends TypeRepository<TypeNodeFactory<Component, XMLSwing<?>>> {
-    private static NodeFactoryRepository instance = new NodeFactoryRepository();
+    private static NodeFactoryRepository instance;
     private NodeFactoryRepository() {
-
-        register(new FlowNodeFactory());
-        register(new ButtonNodeFactory());
-        register(new FrameFactory());
-        register(new TextFieldNodeFactory());
-        register(new TextAreaFactory());
-        register(new GridBagNodeFactory());
-        register(new CheckBoxNodeFactory());
-        register(new RadioButtonNodeFactory());
-        register(new ComboBoxNodeFactory());
-        register(new ScrollPaneNodeFactory());
-        register(new TableNodeFactory());
-        register(new LabelNodeFactory());
-        register(new SliderNodeFactory());
-        register(new BorderNodeFactory());
-        register(new GridNodeFactory());
-        register(new MenuBarNodeFactory());
-        register(new MenuNodeFactory());
-        register(new MenuItemNodeFactory());
-        register(new TabbedPaneFactory());
-        register(new TabFactory());
-
+        internalRegister(new FlowNodeFactory());
+        internalRegister(new ButtonNodeFactory());
+        internalRegister(new FrameFactory());
+        internalRegister(new TextFieldNodeFactory());
+        internalRegister(new TextAreaNodeFactory());
+        internalRegister(new GridBagNodeFactory());
+        internalRegister(new CheckBoxNodeFactory());
+        internalRegister(new RadioButtonNodeFactory());
+        internalRegister(new ComboBoxNodeFactory());
+        internalRegister(new ScrollPaneNodeFactory());
+        internalRegister(new TableNodeFactory());
+        internalRegister(new LabelNodeFactory());
+        internalRegister(new SliderNodeFactory());
+        internalRegister(new BorderNodeFactory());
+        internalRegister(new GridNodeFactory());
+        internalRegister(new MenuBarNodeFactory());
+        internalRegister(new MenuNodeFactory());
+        internalRegister(new MenuItemNodeFactory());
+        internalRegister(new TabbedPaneFactory());
     }
 
     public static void register(TypeNodeFactory<Component, XMLSwing<?>> factory) {
-        instance.register(factory.getTagName(), factory);
+        getInstance().internalRegister(factory);
+    }
+    
+    private static NodeFactoryRepository getInstance() {
+        if(instance == null) {
+            instance = new NodeFactoryRepository();
+        }
+        return instance;
+    }
+
+    private void internalRegister(TypeNodeFactory<Component, XMLSwing<?>> factory) {
+        this.register(factory.getTagName(), factory);
     }
 
     public static TypeNodeFactory<Component, XMLSwing<?>> get(String key) {
-        return instance.obtain(key);
+        return getInstance().obtain(key);
     }
 
 }

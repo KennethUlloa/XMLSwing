@@ -1,4 +1,4 @@
-package xmlswing.components.frames;
+package xmlswing.components.input.button;
 
 import org.w3c.dom.Node;
 import xmlswing.components.AbstractNode;
@@ -7,17 +7,14 @@ import xmlswing.XMLSwing;
 
 import java.awt.*;
 
-public class FrameFactory extends AbstractNodeFactory {
-
-
+public class ButtonNodeFactory extends AbstractNodeFactory {
     @Override
     public String getTagName() {
-        return "Frame";
+        return "Button";
     }
-
 
     @Override
     public AbstractNode<? extends Component> nodeBuild(Node node, XMLSwing<?> context) {
-        return new FrameNode(node, context);
+        return new ButtonNode(node, context);
     }
 }

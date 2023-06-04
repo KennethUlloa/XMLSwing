@@ -1,4 +1,4 @@
-package xmlswing.components.frames;
+package xmlswing.components.input.text;
 
 import org.w3c.dom.Node;
 import xmlswing.components.AbstractNode;
@@ -7,17 +7,19 @@ import xmlswing.XMLSwing;
 
 import java.awt.*;
 
-public class FrameFactory extends AbstractNodeFactory {
-
+/**
+ * <h3>Properties</h3>
+ * cols: number of columns to display
+ */
+public class TextFieldNodeFactory extends AbstractNodeFactory {
 
     @Override
     public String getTagName() {
-        return "Frame";
+        return "TextField";
     }
-
 
     @Override
     public AbstractNode<? extends Component> nodeBuild(Node node, XMLSwing<?> context) {
-        return new FrameNode(node, context);
+        return new TextFieldNode(node, context);
     }
 }

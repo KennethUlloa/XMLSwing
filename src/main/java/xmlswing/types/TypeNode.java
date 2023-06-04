@@ -52,16 +52,17 @@ public abstract class TypeNode<T, K> {
     }
 
     public static boolean shouldIgnore(Node node) {
-        return node.getNodeName().equals("#text") || node.getNodeName().equals("#comment");
+        return node.getNodeName().trim().equals("#text") || node.getNodeName().equals("#comment");
     }
 
     public Node firstTagChild(String tag) {
         for(int i = 0; i < getNode().getChildNodes().getLength() ; i++) {
             Node n = getNode().getChildNodes().item(i);
+            if(TypeNode.shouldIgnore(n)) {
+                continue;
+            }
             if (tag == null) {
-              if (!shouldIgnore()) {
-                  return n;
-              }
+                return n;
             } else if (n.getNodeName().equals(tag)) {
                 return n;
             }
@@ -69,7 +70,7 @@ public abstract class TypeNode<T, K> {
         return null;
     }
 
-    public Node fistTagChild() {
+    public Node firstTagChild() {
         return firstTagChild(null);
     }
 

@@ -26,7 +26,7 @@ public class FlowNode extends AbstractNode<JPanel> {
     }
 
     @Override
-    public JPanel getParentElement() {
+    public JPanel getRootElement() {
         JPanel panel = new JPanel();
         if(hasAttribute("layout")) {
             switch (getAttribute("layout")) {

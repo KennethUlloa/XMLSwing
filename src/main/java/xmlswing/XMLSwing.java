@@ -1,9 +1,17 @@
 package xmlswing;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
+import xmlswing.repositories.NodeFactoryRepository;
 import xmlswing.repositories.ObjectRepository;
 import xmlswing.utils.VariableProcessor;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -27,6 +35,7 @@ public class XMLSwing<T extends Component> {
     public XMLSwing(InputStream inputStream) {
         this.stream = inputStream;
         variableProcessor = new VariableProcessor(stream);
+        objects = new ObjectRepository();
     }
 
     public void registerElement(String key, Object c) {
@@ -41,6 +50,20 @@ public class XMLSwing<T extends Component> {
         return objects.obtain(key, c);
     }
 
+    private T build() throws ParserConfigurationException, IOException, SAXException {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        Document doc = db.parse(variableProcessor.process());
+        doc.getDocumentElement().normalize();
+        Element root = doc.getDocumentElement();
+        return (T) NodeFactoryRepository.get(root.getNodeName()).buildNode(root, this).getObject();
+    }
+    public T getRootComponent() throws ParserConfigurationException, IOException, SAXException {
+        if(rootComponent == null) {
+            rootComponent = build();
+        }
+        return rootComponent;
+    }
     /*
 
     public VariableProcessor getVariableProcessor() {

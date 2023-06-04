@@ -26,7 +26,7 @@ public class MenuNode extends AbstractNode<JMenu> {
     }
 
     @Override
-    public JMenu getParentElement() {
+    public JMenu getRootElement() {
         JMenu menu = new JMenu();
         if(hasAttribute("title")) {
             menu.setText(getAttribute("title"));

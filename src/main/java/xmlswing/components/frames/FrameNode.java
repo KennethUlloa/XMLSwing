@@ -24,7 +24,7 @@ public class FrameNode extends AbstractNode<JFrame> {
     public void parseChildNode(JFrame parent, Node item) {
         WrapNode node_ = new WrapNode(item);
         TypeNodeFactory<Component, XMLSwing<?>> factory = NodeFactoryRepository.get(item.getNodeName());
-        if(factory == null ) {
+        if(factory == null) {
             return;
         }
         TypeNode<Component, XMLSwing<?>> typeNode = factory.buildNode(item, getContext());
@@ -40,7 +40,7 @@ public class FrameNode extends AbstractNode<JFrame> {
     }
 
     @Override
-    public JFrame getParentElement() {
+    public JFrame getRootElement() {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         if(hasAttribute("lafClass")) {

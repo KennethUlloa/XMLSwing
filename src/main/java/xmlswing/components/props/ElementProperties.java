@@ -1,4 +1,4 @@
-package xmlswing.components;
+package xmlswing.components.props;
 
 import java.awt.*;
 
@@ -21,7 +21,7 @@ import java.awt.*;
  *      <li>pink</li>
  * </ul>
  */
-public class CommonProperties {
+public class ElementProperties {
     public static Dimension dimensionFromString(String string) {
         return dimensionFromString(string, false);
     }

@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Form {
+public abstract class Form<T> {
     private List<FormEntry<? extends Component>> elements;
 
     public Form() {
@@ -15,7 +15,9 @@ public class Form {
     }
 
     public void add(FormEntry<? extends Component> element) {
-        elements.add(element);
+        if (element != null)
+            elements.add(element);
+
     }
 
     public Map<String, Object> getValues() throws EmptyValueNotAllowedException {
@@ -27,6 +29,5 @@ public class Form {
         return values;
     }
 
-
-
+    public abstract T processValue() throws EmptyValueNotAllowedException;
 }

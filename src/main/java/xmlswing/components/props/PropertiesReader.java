@@ -1,5 +1,9 @@
-package xmlswing.components;
+package xmlswing.components.props;
 
+import xmlswing.XMLSwing;
+import xmlswing.components.AbstractNode;
+import xmlswing.components.form.BasicForm;
+import xmlswing.components.form.Form;
 import xmlswing.types.TypeNode;
 
 import javax.swing.*;
@@ -9,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-import static xmlswing.components.CommonProperties.getColor;
+import static xmlswing.components.props.ElementProperties.getColor;
 
 /**
  * <h3>Properties</h3>
@@ -42,13 +46,13 @@ import static xmlswing.components.CommonProperties.getColor;
  * </ul>
  */
 public class PropertiesReader {
-    private TypeNode<Component> node;
+    private AbstractNode<? extends Component> node;
 
-    public PropertiesReader(TypeNode<Component> node) {
+    public PropertiesReader(AbstractNode<? extends Component> node) {
         this.node = node;
     }
 
-    public static void setUpComponent(TypeNode<Component> typeNode) {
+    public static void setUpComponent(AbstractNode<? extends Component> typeNode) {
         PropertiesReader propertiesReader = new PropertiesReader(typeNode);
         propertiesReader.setUpComponent();
     }
@@ -66,6 +70,14 @@ public class PropertiesReader {
         setBorder();
         setPadding();
         setForeground();
+        if(node.hasAttribute("form")) {
+            Form form = node.getContext().getElement(node.getAttribute("form"), Form.class);
+            if (form == null) {
+                form = new BasicForm();
+            }
+            form.add(node.asFormEntry());
+            node.getContext().registerElement(node.getAttribute("form"), form);
+        }
 
     }
 
@@ -78,7 +90,7 @@ public class PropertiesReader {
     public void setPadding() {
         if(!node.hasAttribute("padding") || !(node.getObject() instanceof JComponent)) return;
         JComponent component = (JComponent) node.getObject();
-        Insets insets = CommonProperties.insetsFromString(node.getAttribute("padding"));
+        Insets insets = ElementProperties.insetsFromString(node.getAttribute("padding"));
         Border outBorder = component.getBorder();
         Border emptyBorder = new EmptyBorder(insets);
         if(outBorder == null) {
@@ -97,16 +109,16 @@ public class PropertiesReader {
         }
         String[] parameters = node.getAttribute("border").trim().split(" ");
         if(parameters.length != 3) return;
-        int width = Integer.parseInt(parameters[0]);
+        int borderSize = Integer.parseInt(parameters[0]);
         Color color = getColor(parameters[2]);
         switch (parameters[1]) {
-            case "solid": component.setBorder(new LineBorder(color, width)); break;
-            case "dashed": component.setBorder(BorderFactory.createDashedBorder(color, width, width)); break;
+            case "solid": component.setBorder(new LineBorder(color, borderSize)); break;
+            case "dashed": component.setBorder(BorderFactory.createDashedBorder(color, borderSize, borderSize)); break;
             case "double": component.setBorder(BorderFactory.createCompoundBorder(
-                    new LineBorder(color, width),
+                    new LineBorder(color, borderSize),
                     new CompoundBorder(
-                            new EmptyBorder(width, width, width, width),
-                            new LineBorder(color, width)
+                            new EmptyBorder(borderSize, borderSize, borderSize, borderSize),
+                            new LineBorder(color, borderSize)
                     )
             )); break;
         }

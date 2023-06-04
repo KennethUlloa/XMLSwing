@@ -25,7 +25,7 @@ public class BorderNode extends AbstractNode<JPanel> {
     }
 
     @Override
-    public JPanel getParentElement() {
+    public JPanel getRootElement() {
         return new JPanel(new BorderLayout());
     }
 

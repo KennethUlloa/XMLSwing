@@ -27,7 +27,7 @@ public class MenuBarNode extends AbstractNode<JMenuBar> {
     }
 
     @Override
-    public JMenuBar getParentElement() {
+    public JMenuBar getRootElement() {
         return new JMenuBar();
     }
 }

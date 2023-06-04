@@ -29,7 +29,7 @@ public class TabPaneNode extends AbstractNode<JTabbedPane> {
     }
 
     @Override
-    public JTabbedPane getParentElement() {
+    public JTabbedPane getRootElement() {
         return new JTabbedPane();
     }
 }

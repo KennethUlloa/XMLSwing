@@ -6,7 +6,7 @@ import xmlswing.types.TypeNodeFactory;
 import xmlswing.repositories.NodeFactoryRepository;
 import xmlswing.XMLSwing;
 import xmlswing.components.AbstractNode;
-import xmlswing.components.CommonProperties;
+import xmlswing.components.props.ElementProperties;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +28,7 @@ public class GridBagNode extends AbstractNode<JPanel> {
     }
 
     @Override
-    public JPanel getParentElement() {
+    public JPanel getRootElement() {
         JPanel panel = new JPanel();
         GridBagLayout gridBagLayout = new GridBagLayout();
         if(hasAttribute("row-weights")) {
@@ -114,7 +114,7 @@ public class GridBagNode extends AbstractNode<JPanel> {
             }
         }
         if(node.hasAttribute("insets")) {
-            constraints.insets = CommonProperties.insetsFromString(node.getAttribute("insets"));
+            constraints.insets = ElementProperties.insetsFromString(node.getAttribute("insets"));
         }
         return constraints;
     }

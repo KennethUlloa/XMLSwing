@@ -1,7 +1,7 @@
 package xmlswing.components.panels.border;
 
 import org.w3c.dom.Node;
-import xmlswing.types.TypeNode;
+import xmlswing.components.AbstractNode;
 import xmlswing.XMLSwing;
 import xmlswing.components.AbstractNodeFactory;
 
@@ -27,7 +27,7 @@ public class BorderNodeFactory extends AbstractNodeFactory {
     }
 
     @Override
-    public TypeNode<Component, XMLSwing<?>> nodeBuild(Node node, XMLSwing<?> container) {
+    public AbstractNode<? extends Component> nodeBuild(Node node, XMLSwing<?> container) {
         return new BorderNode(node, container);
     }
 }

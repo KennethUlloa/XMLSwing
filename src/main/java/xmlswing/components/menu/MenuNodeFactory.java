@@ -1,7 +1,7 @@
 package xmlswing.components.menu;
 
 import org.w3c.dom.Node;
-import xmlswing.types.TypeNode;
+import xmlswing.components.AbstractNode;
 import xmlswing.XMLSwing;
 import xmlswing.components.AbstractNodeFactory;
 
@@ -15,7 +15,7 @@ public class MenuNodeFactory extends AbstractNodeFactory {
     }
 
     @Override
-    public TypeNode<Component, XMLSwing<?>> nodeBuild(Node node, XMLSwing<?> context) {
+    public AbstractNode<? extends Component> nodeBuild(Node node, XMLSwing<?> context) {
         return new MenuNode(node, context);
     }
 }
