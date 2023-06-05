@@ -16,15 +16,29 @@ import java.nio.file.Paths;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException, UnsupportedLookAndFeelException {
-        XMLSwing<JFrame> swing = new XMLSwing<>(Main.class.getResourceAsStream("gui.xml"));
-        JFrame frame = swing.getRootComponent();
-        swing.getElement("guardar", JButton.class).addActionListener(a -> {
+        XMLSwing<JDialog> swing = new XMLSwing<>(Main.class.getResourceAsStream("dialog.xml"));
+        JDialog dialog = swing.getRootComponent();
+        swing.getElement("guardar2", JButton.class).addActionListener(a -> {
             try {
-                System.out.println(swing.getElement("obj", Form.class).getValues());
+                System.out.println(swing.getElement("obj2", Form.class).getValues());
             } catch (EmptyValueNotAllowedException e) {
-                JOptionPane.showMessageDialog(frame, e.getMessage(), "Form", JOptionPane.ERROR_MESSAGE);
+                throw new RuntimeException(e);
             }
         });
+
+        swing.getElement("cancelar2", JButton.class).addActionListener(a -> {
+            swing.getElement("obj2", Form.class).clear();
+        });
+
+
+        XMLSwing<JFrame> xmlSwing = new XMLSwing<>(Main.class.getResourceAsStream("gui.xml"));
+        JFrame frame = xmlSwing.getRootComponent();
+
+        xmlSwing.getElement("cancelar", JButton.class).addActionListener(a -> {
+            dialog.setVisible(true);
+            System.out.println("Dialog!!!");
+        });
+
         frame.setVisible(true);
 
     }

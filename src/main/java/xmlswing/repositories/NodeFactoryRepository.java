@@ -1,7 +1,12 @@
 package xmlswing.repositories;
 
 import xmlswing.XMLSwing;
+import xmlswing.components.frames.DialogNodeFactory;
 import xmlswing.components.input.button.ButtonNodeFactory;
+import xmlswing.components.input.formatted.FormattedNodeFactory;
+import xmlswing.components.input.groups.MultipleGroupFactory;
+import xmlswing.components.input.groups.MultipleGroupNode;
+import xmlswing.components.input.groups.SingleGroupFactory;
 import xmlswing.components.input.selection.CheckBoxNodeFactory;
 import xmlswing.components.input.selection.ComboBoxNodeFactory;
 import xmlswing.components.input.selection.RadioButtonNodeFactory;
@@ -47,6 +52,10 @@ public class NodeFactoryRepository extends TypeRepository<TypeNodeFactory<Compon
         internalRegister(new MenuNodeFactory());
         internalRegister(new MenuItemNodeFactory());
         internalRegister(new TabbedPaneFactory());
+        internalRegister(new FormattedNodeFactory());
+        internalRegister(new SingleGroupFactory());
+        internalRegister(new MultipleGroupFactory());
+        internalRegister(new DialogNodeFactory());
     }
 
     public static void register(TypeNodeFactory<Component, XMLSwing<?>> factory) {

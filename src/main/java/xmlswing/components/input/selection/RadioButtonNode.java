@@ -4,8 +4,13 @@ import org.w3c.dom.Node;
 import xmlswing.XMLSwing;
 import xmlswing.components.AbstractNode;
 import xmlswing.components.CustomButtonGroup;
+import xmlswing.components.NodeFormEntry;
+import xmlswing.components.form.BasicForm;
+import xmlswing.components.form.Form;
+import xmlswing.components.form.FormEntry;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class RadioButtonNode extends AbstractNode<JRadioButton> {
     public RadioButtonNode(Node node, XMLSwing<?> context) {
@@ -16,17 +21,26 @@ public class RadioButtonNode extends AbstractNode<JRadioButton> {
     public JRadioButton getRootElement() {
         JRadioButton radioButton = new JRadioButton();
         radioButton.setText(getNode().getTextContent().trim());
-        if(hasAttribute("selected")) {
-            radioButton.setSelected(getAttribute("selected").equals("true"));
-        }
-        if(hasAttribute("group")) {
-            CustomButtonGroup group = getContext().getElement(getAttribute("group"), CustomButtonGroup.class);
-            if(group == null) {
-                group = new CustomButtonGroup();
-                getContext().registerElement(getAttribute("group"), group);
-            }
-            group.add(radioButton);
-        }
+        radioButton.setSelected(hasAttribute("selected"));
         return radioButton;
+    }
+
+    @Override
+    public FormEntry<JRadioButton> asFormEntry() {
+        return new NodeFormEntry<JRadioButton>(this) {
+            @Override
+            public void clearValue() {
+
+            }
+
+            @Override
+            public Object getRawValue() {
+                if(hasAttribute("value")) {
+                    return getAttribute("value");
+                } else{
+                    return element.getText();
+                }
+            }
+        };
     }
 }

@@ -31,6 +31,11 @@ public class TextFieldNode extends AbstractNode<JTextField> {
     public FormEntry<JTextField> asFormEntry() {
         return new NodeFormEntry<JTextField>(this) {
             @Override
+            public void clearValue() {
+                element.setText("");
+            }
+
+            @Override
             public Object getRawValue() {
                 return element.getText();
             }

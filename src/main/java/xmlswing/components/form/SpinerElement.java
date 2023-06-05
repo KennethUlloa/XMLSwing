@@ -8,6 +8,11 @@ public class SpinerElement extends FormEntry<JSpinner>{
     }
 
     @Override
+    public void clearValue() {
+
+    }
+
+    @Override
     public Object getRawValue() {
         return element.getValue();
     }

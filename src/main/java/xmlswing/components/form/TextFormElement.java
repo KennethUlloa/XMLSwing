@@ -8,6 +8,11 @@ public class TextFormElement extends FormEntry<JTextComponent> {
     }
 
     @Override
+    public void clearValue() {
+
+    }
+
+    @Override
     public Object getRawValue() {
         return element.getText();
     }

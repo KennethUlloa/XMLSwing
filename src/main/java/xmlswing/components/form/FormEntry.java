@@ -29,6 +29,8 @@ public abstract class FormEntry<T>  {
         return false;
     }
 
+    public abstract void clearValue();
+
     public abstract Object getRawValue();
 
 }

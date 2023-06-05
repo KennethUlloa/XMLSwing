@@ -30,4 +30,19 @@ public abstract class Form<T> {
     }
 
     public abstract T processValue() throws EmptyValueNotAllowedException;
+
+    public FormEntry<? extends Component> get(String name) {
+        for(FormEntry<? extends Component> entry  : elements) {
+            if(entry.name.equals(name)) {
+                return entry;
+            }
+        }
+        return null;
+    }
+
+    public void clear() {
+        for(FormEntry<? extends Component> entry  : elements) {
+            entry.clearValue();
+        }
+    }
 }

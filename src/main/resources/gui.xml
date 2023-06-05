@@ -5,43 +5,75 @@
         title="App"
         onclose="exit"
 >
+    <MenuBar>
+        <Menu title="Archivos">
+            <MenuItem keys="control N">Nuevo</MenuItem>
+        </Menu>
+    </MenuBar>
 
-    <GridBag is-content-pane="" row-weights="0 1" rows="0 1" column-weights="0.2 ">
-        <GridBag  column-weights="0 1" columns="0 1" insets="15" rows="0 0 0 0 0 0"
-                  row-weights="0 0 0 0 0 0">
+    <TabPane is-content-pane="">
+        <GridBag  tabName="Desarrolladora" row-weights="0 1" rows="0 1" column-weights="0.2 ">
+            <GridBag  column-weights="0 1" columns="0 1" insets="15" rows="0 0 0 0 0 0"
+                      row-weights="0 0 0 0 0 0">
                 <Label row="0" col="0" font-style="bold">Nombre</Label>
-                <TextField row="0" col="1" fill="horizontal" id="nombre" cols="10" padding="5" form="obj" required=""/>
+                <TextField row="0" col="1" fill="horizontal" id="nombre" cols="10" form="obj" required="" insets="5"/>
                 <Label row="1" column="0" font-style="bold">Año</Label>
-                <TextField row="1" col="1" fill="horizontal" id="anio" form="obj" required=""/>
-                <Label row="2" column="0" font-style="bold">Slogan</Label>
-                <TextField row="2" col="1" fill="horizontal" id="slogan" form="obj" required=""/>
+                <TextField row="1" col="1" fill="horizontal" id="anio" form="obj" required="" insets="5"/>
+                <Label row="2" column="0" font-style="bold">Independiente</Label>
+                <Flow row="2" column="1" fill="horizontal">
+                    <RadioButton selected="" form="obj" name="indep">Si</RadioButton>
+                    <RadioButton form="obj" name="indep">No</RadioButton>
+                </Flow>
                 <Label row="3" column="0" font-style="bold">Url</Label>
-                <TextField row="3" col="1" fill="horizontal" id="url" form="obj" required=""/>
+                <TextField row="3" col="1" fill="horizontal" id="url" form="obj" required="" insets="5"/>
                 <Label row="4" col="0" font-style="bold">Ubicación</Label>
-                <TextField row="4" col="1" fill="horizontal" id="ubicacion" name="ubicación" form="obj" required=""/>
+                <TextField row="4" col="1" fill="horizontal" id="ubicacion" name="ubicacion" form="obj" required="" insets="5"/>
                 <Flow row="5" col="1" fill="horizontal" layout="right">
                     <Button id="guardar">Guardar</Button>
                     <Button id="cancelar">Cancelar</Button>
                 </Flow>
             </GridBag>
-            <ScrollPane row="1" fill="both">
-                <Table>
-                    <th>
-                        <td>Nombre</td>
-                        <td>Año</td>
-                        <td>Ubicación</td>
-                        <td>Slogan</td>
-                        <td>Url</td>
-                    </th>
-                    <tr>
-                        <td>Nombre</td>
-                        <td>Año</td>
-                        <td>Ubicación</td>
-                        <td>Slogan</td>
-                        <td>Url</td>
-                    </tr>
+            <ScrollPane row="1" fill="both" insets="5">
+                <Table id="companyTable">
                 </Table>
             </ScrollPane>
         </GridBag>
+        <GridBag  tabName="Videojuegos" row-weights="0 1" rows="0 1" column-weights="0.2 ">
+            <GridBag  column-weights="0 1" columns="0 1" insets="15" rows="0 0 0 0 0 0"
+                      row-weights="0 0 0 0 0 0">
+                <Label row="0" col="0" font-style="bold">Nombre</Label>
+                <TextField row="0" col="1" fill="horizontal" id="nombre" cols="10" form="obj2"
+                                format="dd-MM-yyyy"
+                                type="date"
+                                name="fecha"
+                                required="" insets="5" />
+                <Label row="1" column="0" font-style="bold">Año</Label>
+                <TextField row="1" col="1" fill="horizontal" id="anio" form="obj2"
+                             required="" insets="5"
+                             type="number"
+                             name="anio"
+                             format="###.###"/>
+                <Label row="2" column="0" font-style="bold">Independiente</Label>
+                <MultipleGroup row="2" column="1" fill="horizontal" form="obj2" name="indep2">
+                    <CheckBox  selected="">Si</CheckBox>
+                    <CheckBox>No</CheckBox>
+                    <CheckBox>Algo</CheckBox>
+                    <CheckBox>Nel</CheckBox>
+                </MultipleGroup>
+                <Label row="3" column="0" font-style="bold">Url</Label>
+                <TextField row="3" col="1" fill="horizontal" id="url" form="obj2" required="" insets="5"/>
+                <Label row="4" col="0" font-style="bold">Ubicación</Label>
+                <TextField row="4" col="1" fill="horizontal" id="ubicacion" name="ubicacion" form="obj2" required="" insets="5"/>
+                <Flow row="5" col="1" fill="horizontal" layout="right">
+                    <Button id="guardar2">Guardar</Button>
+                    <Button id="cancelar2">Cancelar</Button>
+                </Flow>
+            </GridBag>
+            <ScrollPane row="1" fill="both" insets="5">
+                <Table id="videojuegoTable">
+                </Table>
+            </ScrollPane>
+        </GridBag>
+    </TabPane>
 
 </Frame>

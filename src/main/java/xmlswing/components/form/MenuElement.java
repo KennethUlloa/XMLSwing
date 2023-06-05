@@ -10,6 +10,11 @@ public class MenuElement extends FormEntry<JComboBox>{
     }
 
     @Override
+    public void clearValue() {
+
+    }
+
+    @Override
     public Object getRawValue() {
         return element.getSelectedItem();
     }

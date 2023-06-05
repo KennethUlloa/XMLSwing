@@ -22,13 +22,12 @@ public class FrameNode extends AbstractNode<JFrame> {
 
     @Override
     public void parseChildNode(JFrame parent, Node item) {
-        WrapNode node_ = new WrapNode(item);
         TypeNodeFactory<Component, XMLSwing<?>> factory = NodeFactoryRepository.get(item.getNodeName());
         if(factory == null) {
             return;
         }
         TypeNode<Component, XMLSwing<?>> typeNode = factory.buildNode(item, getContext());
-        if(node_.hasAttribute("is-content-pane")) {
+        if(typeNode.hasAttribute("is-content-pane")) {
             if (typeNode.getObject() instanceof Container) {
                 parent.setContentPane((Container) typeNode.getObject());
                 return;
@@ -66,7 +65,6 @@ public class FrameNode extends AbstractNode<JFrame> {
         }
         frame.setSize(width, height);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         switch (getAttribute("onclose")) {
             case "dispose": frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);break;
             case "hide": frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);break;
